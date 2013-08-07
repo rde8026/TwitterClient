@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
 
     private String TAG = TweetsFragment.class.getSimpleName();
     private ListView listView;
+    private LinearLayout linearLoading;
     private TweetsAdapter adapter;
     private EndlessTweetsAdapter endlessTweetsAdapter;
 
@@ -56,8 +58,11 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.tweets_fragment_layout, container, false);
         listView = (ListView) v.findViewById(android.R.id.list);
+        linearLoading = (LinearLayout) v.findViewById(R.id.linearLoading);
         pullToRefreshAttacher = ((MainActivity) getSherlockActivity()).getPullToRefreshAttacher();
         pullToRefreshAttacher.addRefreshableView(listView, this);
+
+        showLoadingView();
         return v;
     }
 
@@ -115,7 +120,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
                     }
                 }
                 pullToRefreshAttacher.setRefreshComplete();
-
+                showListView();
             }
         });
     }
@@ -127,6 +132,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
             public void run() {
                 if (errorMessage.getCode() == TwitterApiController.GET_USER_TIMELINE_ERROR_CODE) {
                     pullToRefreshAttacher.setRefreshComplete();
+                    showListView();
                 }
             }
         });
@@ -149,7 +155,6 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     @Override
     public void onRefreshStarted(View view) {
         try {
-            //Status mostRecent = adapter.getItem(0);
             Status mostRecent = (Status) endlessTweetsAdapter.getItem(0);
             TwitterApiController.getInstance(getSherlockActivity()).refreshUserTimeLine(mostRecent.getId());
         } catch (Exception e) {
@@ -158,4 +163,17 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
             pullToRefreshAttacher.setRefreshComplete();
         }
     }
+
+    private void showLoadingView() {
+        listView.setVisibility(View.GONE);
+        linearLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void showListView() {
+        if (listView.getVisibility() == View.GONE && linearLoading.getVisibility() == View.VISIBLE) {
+            listView.setVisibility(View.VISIBLE);
+            linearLoading.setVisibility(View.GONE);
+        }
+    }
+
 }

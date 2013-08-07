@@ -1,6 +1,9 @@
 package com.eldridge.twitsync.controller;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.activeandroid.ActiveAndroid;
@@ -12,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -31,6 +33,7 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
+    public static final String CACHED_TWEETS_KEY = "TWEETS";
 
 
     private static final int THREAD_POOL_SIZE = 20;
@@ -57,14 +60,10 @@ public class CacheController {
                 ActiveAndroid.beginTransaction();
                 try {
                     for (Status s : items) {
-                        Tweet tweet = new Tweet();
-                        tweet.tweetId = s.getId();
-                        tweet.timestamp = s.getCreatedAt().getTime();
-                        tweet.tweet = convertToByteArray(s);
-                        tweet.save();
+                        addTweetToCache(s);
                     }
                     ActiveAndroid.setTransactionSuccessful();
-                    checkCache();
+
                 } catch (IOException ioe) {
                     Log.e(TAG, "", ioe);
                 } finally {
@@ -74,10 +73,35 @@ public class CacheController {
         });
     }
 
-    public void checkCache() {
+    private void addTweetToCache(Status s) throws IOException {
+        Tweet existing = new Select().from(Tweet.class).where("tweetId = ?", s.getId()).executeSingle();
+        if (existing == null) {
+            Tweet tweet = new Tweet();
+            tweet.tweetId = s.getId();
+            tweet.timestamp = s.getCreatedAt().getTime();
+            tweet.tweet = convertToByteArray(s);
+            tweet.save();
+        }
+    }
+
+    private void clearDb() {
+        List<Tweet> all = new Select().from(Tweet.class).execute();
+        ActiveAndroid.beginTransaction();
+        try {
+            for (Tweet t : all) {
+                t.delete();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
+    }
+
+    public void checkCache(final Handler handler) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                Message message = Message.obtain();
                 try {
                     Select select = new Select();
                     List<Tweet> tweetList =
@@ -91,10 +115,18 @@ public class CacheController {
                         tweets.add(s);
                     }
                     Log.d(TAG, "**** Check Cache ****");
+                    Bundle b = new Bundle();
+                    b.putSerializable(CACHED_TWEETS_KEY, tweets);
+                    message.setData(b);
+                    handler.sendMessage(message);
                 } catch (IOException ioe) {
                     Log.e(TAG, "", ioe);
+                    message.arg1 = -1;
+                    handler.sendMessage(message);
                 } catch (ClassNotFoundException cnfe) {
                     Log.e(TAG, "", cnfe);
+                    message.arg1 = -1;
+                    handler.sendMessage(message);
                 }
             }
         });

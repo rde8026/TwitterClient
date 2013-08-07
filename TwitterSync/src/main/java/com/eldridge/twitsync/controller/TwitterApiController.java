@@ -87,7 +87,7 @@ public class TwitterApiController {
             public void run() {
                 try {
                     ResponseList<Status> tweets = twitter.getHomeTimeline();
-                    CacheController.getInstance(context).addToCache(tweets);
+                    //CacheController.getInstance(context).addToCache(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
