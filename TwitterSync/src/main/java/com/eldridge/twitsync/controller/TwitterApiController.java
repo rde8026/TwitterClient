@@ -36,7 +36,7 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 20;
+    private static final int COUNT = 50;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -86,9 +86,7 @@ public class TwitterApiController {
             @Override
             public void run() {
                 try {
-                    ResponseList<Status> tweets = twitter.getHomeTimeline();
-                    //CacheController.getInstance(context).addToCache(tweets);
-                    BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
+                    BusController.getInstance().postMessage(new TimelineUpdateMessage(getPagedTweets(null), false));
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -138,7 +136,9 @@ public class TwitterApiController {
     }
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
-        return twitter.getHomeTimeline(paging);
+        ResponseList<Status> tweets = (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
+        CacheController.getInstance(context).addToCache(tweets);
+        return tweets;
     }
 
 }
