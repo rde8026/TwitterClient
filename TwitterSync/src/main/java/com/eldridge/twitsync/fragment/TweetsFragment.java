@@ -105,15 +105,19 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
                 }
 
                 getListView().setAdapter(endlessTweetsAdapter);
-                //getListView().setAdapter(adapter);
 
                 if (timelineUpdateMessage.isRefresh()) {
                     if (timelineUpdateMessage.getTweets() != null && timelineUpdateMessage.getTweets().size() > 0 && timelineUpdateMessage.isPrepend()) {
-                        for (Status s : timelineUpdateMessage.getTweets()) {
+                        /*for (Status s : timelineUpdateMessage.getTweets()) {
+                            adapter.insert(s, 0);
+                        }*/
+
+                        for (int i = timelineUpdateMessage.getTweets().size() - 1; i >= 0; i--) {
+                            Status s = timelineUpdateMessage.getTweets().get(i);
                             adapter.insert(s, 0);
                         }
+
                         endlessTweetsAdapter.notifyDataSetChanged();
-                        //adapter.notifyDataSetChanged();
                         listView.smoothScrollToPosition(0);
                     } else {
                         Toast.makeText(getSherlockActivity(), "No new Tweets to show!", Toast.LENGTH_SHORT).show();

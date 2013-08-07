@@ -7,5 +7,6 @@
     <string name="loading_frag_text">Working...</string>
     <string name="menu_move_to_top">Top</string>
     <string name="move_to_bottom">Bottom</string>
+    <string name="remove_cache">Remove Cache</string>
 
 </resources>

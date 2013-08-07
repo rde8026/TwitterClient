@@ -11,6 +11,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.controller.BusController;
+import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.fragment.LoadingFragment;
 import com.eldridge.twitsync.fragment.TweetsFragment;
@@ -91,6 +92,8 @@ public class MainActivity extends SherlockFragmentActivity {
             BusController.getInstance().postMessage(new ScrollMessage(true));
         } else if (item.getItemId() == R.id.moveToBottom) {
             BusController.getInstance().postMessage(new ScrollMessage(false));
+        } else if (item.getItemId() == R.id.action_delete_db) {
+            CacheController.getInstance(this).clearDb();
         }
         return super.onMenuItemSelected(featureId, item);
     }

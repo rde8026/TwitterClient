@@ -29,7 +29,7 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 250;
+    private static final int CACHE_SIZE = 55;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -70,7 +70,7 @@ public class CacheController {
             Log.e(TAG, "", ioe);
         } finally {
             ActiveAndroid.endTransaction();
-            trimCache();
+            //trimCache();
         }
     }
 
@@ -91,7 +91,7 @@ public class CacheController {
                         Log.d(TAG, "** Trimming Cache to " + CACHE_SIZE + " **");
                         int cutAmount = tweets.size() - CACHE_SIZE;
                         Log.d(TAG, "** Cutting " + cutAmount + " from cache **");
-                        for (int i = 0; i < tweets.size(); i++) {
+                        for (int i = tweets.size() - 1; i >= 0; i--) {
                             if (i < cutAmount) {
                                 Tweet t = tweets.get(i);
                                 t.delete();
@@ -127,8 +127,16 @@ public class CacheController {
     }
 
 
-    private void clearDb() {
-        new Delete().from(Tweet.class).execute();
+    public void clearDb() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                new Delete().from(Tweet.class).execute();
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "*** Deleted ALL from cache db ***");
+                }
+            }
+        });
     }
 
     private List<Tweet> getCachedTweets(String sort) {
