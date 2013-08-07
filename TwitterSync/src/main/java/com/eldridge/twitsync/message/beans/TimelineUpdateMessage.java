@@ -12,7 +12,7 @@ import twitter4j.Status;
  */
 public class TimelineUpdateMessage implements Serializable {
 
-    private ResponseList<Status> tweets;
+    private List<Status> tweets;
     private boolean refresh;
     private boolean prepend;
 
@@ -20,29 +20,29 @@ public class TimelineUpdateMessage implements Serializable {
     public TimelineUpdateMessage() {
     }
 
-    public TimelineUpdateMessage(ResponseList<Status> tweets) {
+    public TimelineUpdateMessage(List<Status> tweets) {
         this.tweets = tweets;
         this.refresh = false;
         this.prepend = false;
     }
 
-    public TimelineUpdateMessage(ResponseList<Status> tweets, boolean refresh) {
+    public TimelineUpdateMessage(List<Status> tweets, boolean refresh) {
         this.tweets = tweets;
         this.refresh = refresh;
         prepend = false;
     }
 
-    public TimelineUpdateMessage(ResponseList<Status> tweets, boolean refresh, boolean prepend) {
+    public TimelineUpdateMessage(List<Status> tweets, boolean refresh, boolean prepend) {
         this.tweets = tweets;
         this.refresh = refresh;
         this.prepend = prepend;
     }
 
-    public ResponseList<Status> getTweets() {
+    public List<Status> getTweets() {
         return tweets;
     }
 
-    public void setTweets(ResponseList<Status> tweets) {
+    public void setTweets(List<Status> tweets) {
         this.tweets = tweets;
     }
 

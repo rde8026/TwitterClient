@@ -1,15 +1,15 @@
 package com.eldridge.twitsync.controller;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
+import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,6 +21,9 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.json.DataObjectFactory;
 
 /**
  * Created by ryaneldridge on 8/4/13.
@@ -50,7 +53,11 @@ public class TwitterApiController {
 
         AccessToken at = new AccessToken(accessToken, secret);
 
-        twitter = TwitterFactory.getSingleton();
+        Configuration cb =
+                new ConfigurationBuilder()
+                    .setJSONStoreEnabled(true)
+                    .build();
+        twitter = new TwitterFactory(cb).getInstance();
         twitter.setOAuthConsumer(TwitterRegisterController.CONSUMER_KEY, TwitterRegisterController.CONSUMER_SECRET);
         twitter.setOAuthAccessToken(at);
     }
@@ -85,8 +92,31 @@ public class TwitterApiController {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+               try {
+                   List<Status> tweets = CacheController.getInstance(context).getLatestCachedTweets();
+                   if (tweets != null && !tweets.isEmpty()) {
+                       BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets));
+                   } else {
+                       getUserTimeLineFromTwitter();
+                   }
+               } catch (Exception e) {
+                   Log.e(TAG, "", e);
+                   getUserTimeLineFromTwitter();
+               }
+            }
+        });
+    }
+
+    public void getUserTimeLineFromTwitter() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
                 try {
-                    BusController.getInstance().postMessage(new TimelineUpdateMessage(getPagedTweets(null), false));
+                    Paging paging = new Paging();
+                    paging.setCount(50);
+                    ResponseList<Status> tweets = getPagedTweets(paging);
+                    BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
+                    CacheController.getInstance(context).addToCache(tweets);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -102,7 +132,9 @@ public class TwitterApiController {
                 try {
                     Paging paging = new Paging();
                     paging.setSinceId(statusId);
-                    BusController.getInstance().postMessage(new TimelineUpdateMessage(getPagedTweets(paging), true, true));
+                    ResponseList<Status> tweets = getPagedTweets(paging);
+                    BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
+                    CacheController.getInstance(context).addToCache(tweets);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -111,33 +143,18 @@ public class TwitterApiController {
         });
     }
 
-    public void getUserTimeLineHistory(final Long statusId) {
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Paging paging = new Paging();
-                    paging.setMaxId(statusId);
-                    paging.setCount(COUNT * 2);
-                    BusController.getInstance().postMessage(new TimelineUpdateMessage(getPagedTweets(paging), true, false));
-                } catch (TwitterException te) {
-                    Log.e(TAG, "", te);
-                    BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
-                }
-            }
-        });
-    }
-
+    //This is NOT THREADED so it must be called from a background thread.
     public ResponseList<Status> syncGetUserTimeLineHistory(final Long statusId) throws TwitterException {
         Paging paging = new Paging();
         paging.setMaxId(statusId);
         paging.setCount(COUNT * 2);
-        return getPagedTweets(paging);
+        ResponseList<Status> tweets = getPagedTweets(paging);
+        CacheController.getInstance(context).addToCache(tweets);
+        return tweets;
     }
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
         ResponseList<Status> tweets = (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
-        CacheController.getInstance(context).addToCache(tweets);
         return tweets;
     }
 

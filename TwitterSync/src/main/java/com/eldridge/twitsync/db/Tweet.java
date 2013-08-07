@@ -21,7 +21,7 @@ public class Tweet extends Model {
     @Column(name = "timestamp", notNull = true)
     public Long timestamp;
 
-    @Column(name = "tweet", notNull = true)
-    public byte[] tweet;
+    @Column(name = "json", notNull = true)
+    public String json;
 
 }
