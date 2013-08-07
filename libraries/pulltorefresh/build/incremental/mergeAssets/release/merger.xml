@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/ryaneldridge/opt/java/twittersync/TwitterClient/libraries/pulltorefresh/src/main/assets" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/Users/ryaneldridge/opt/java/twittersync/TwitterClient/libraries/pulltorefresh/src/release/assets" />
+    </dataSet>
+
+</merger>

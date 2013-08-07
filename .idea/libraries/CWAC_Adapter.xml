@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CWAC-Adapter">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TwitterSync/libs/CWAC-Adapter.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
