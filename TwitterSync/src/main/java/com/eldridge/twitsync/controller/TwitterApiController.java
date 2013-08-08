@@ -113,7 +113,7 @@ public class TwitterApiController {
             public void run() {
                 try {
                     Paging paging = new Paging();
-                    paging.setCount(50);
+                    paging.setCount(COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
                     CacheController.getInstance(context).addToCache(tweets);

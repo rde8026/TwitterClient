@@ -29,7 +29,7 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 55;
+    private static final int CACHE_SIZE = 251;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -70,7 +70,7 @@ public class CacheController {
             Log.e(TAG, "", ioe);
         } finally {
             ActiveAndroid.endTransaction();
-            //trimCache();
+            trimCache();
         }
     }
 
@@ -86,20 +86,23 @@ public class CacheController {
                 Log.d(TAG, "** Running trimCache to keep things reasonable **");
                 ActiveAndroid.beginTransaction();
                 try {
-                    List<Tweet> tweets = getCachedTweets("timestamp ASC");
+                    List<Tweet> tweets = new Select().from(Tweet.class).orderBy("Id DESC").execute();
                     if (tweets.size() >= CACHE_SIZE) {
+                        long startTime = System.currentTimeMillis();
                         Log.d(TAG, "** Trimming Cache to " + CACHE_SIZE + " **");
                         int cutAmount = tweets.size() - CACHE_SIZE;
                         Log.d(TAG, "** Cutting " + cutAmount + " from cache **");
-                        for (int i = tweets.size() - 1; i >= 0; i--) {
-                            if (i < cutAmount) {
-                                Tweet t = tweets.get(i);
+                        Tweet first = tweets.get(0);
+                        Log.d(TAG, "** Cutting DB from " + first.getId() + " **");
+
+                        for (Tweet t : tweets) {
+                            if (t.getId() <= first.getId()) {
                                 t.delete();
-                            } else {
-                                break;
                             }
                         }
                         ActiveAndroid.setTransactionSuccessful();
+                        long delta = System.currentTimeMillis() - startTime;
+                        Log.d(TAG, "** Cache Trimming took " + delta + "ms ***");
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
