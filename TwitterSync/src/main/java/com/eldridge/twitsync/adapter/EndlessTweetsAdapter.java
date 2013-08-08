@@ -67,10 +67,4 @@ public class EndlessTweetsAdapter extends EndlessAdapter {
         ((ArrayAdapter<Status>)getWrappedAdapter()).notifyDataSetChanged();
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        //TODO: Add items to cache here
-        Log.d(TwitterApiController.class.getSimpleName(), "**** DataSet Changed! ****");
-    }
 }

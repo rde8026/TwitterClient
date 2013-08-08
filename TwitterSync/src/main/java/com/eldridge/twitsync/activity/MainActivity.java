@@ -63,6 +63,7 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        CacheController.getInstance(this).trimCache();
         BusController.getInstance().unRegister(this);
     }
 

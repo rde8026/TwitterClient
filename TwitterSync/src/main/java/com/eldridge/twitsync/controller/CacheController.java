@@ -29,7 +29,7 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 251;
+    private static final int CACHE_SIZE = 51;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -56,7 +56,7 @@ public class CacheController {
                 if (checkTweetsExistence(s)) {
                     Tweet tweet = new Tweet();
                     tweet.tweetId = s.getId();
-                    tweet.timestamp = System.currentTimeMillis();//s.getCreatedAt().getTime();
+                    tweet.timestamp = s.getCreatedAt().getTime();//System.currentTimeMillis();
                     tweet.json = DataObjectFactory.getRawJSON(s);
                     tweet.save();
                 }
@@ -70,7 +70,6 @@ public class CacheController {
             Log.e(TAG, "", ioe);
         } finally {
             ActiveAndroid.endTransaction();
-            trimCache();
         }
     }
 
@@ -79,30 +78,27 @@ public class CacheController {
         return existing == null;
     }
 
-    private void trimCache() {
+    public void trimCache() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "** Running trimCache to keep things reasonable **");
+                Log.d(TAG, "** Checking Cache size **");
                 ActiveAndroid.beginTransaction();
                 try {
-                    List<Tweet> tweets = new Select().from(Tweet.class).orderBy("Id DESC").execute();
-                    if (tweets.size() >= CACHE_SIZE) {
-                        long startTime = System.currentTimeMillis();
-                        Log.d(TAG, "** Trimming Cache to " + CACHE_SIZE + " **");
-                        int cutAmount = tweets.size() - CACHE_SIZE;
-                        Log.d(TAG, "** Cutting " + cutAmount + " from cache **");
-                        Tweet first = tweets.get(0);
-                        Log.d(TAG, "** Cutting DB from " + first.getId() + " **");
-
-                        for (Tweet t : tweets) {
-                            if (t.getId() <= first.getId()) {
+                    //List<Tweet> top = new Select().from(Tweet.class).limit(CACHE_SIZE).execute();
+                    List<Tweet> top = new Select().from(Tweet.class).orderBy("timestamp ASC").limit(CACHE_SIZE).execute();
+                    if (top != null && !top.isEmpty()) {
+                        List<Tweet> outliers = new Select().from(Tweet.class).where("Id >= " + top.get(top.size() - 1).getId()).execute();
+                        if (outliers != null && !outliers.isEmpty()) {
+                            long startTime = System.currentTimeMillis();
+                            Log.d(TAG, "** Removing " + outliers.size() + " from Cache **");
+                            for (Tweet t : outliers) {
                                 t.delete();
                             }
+                            ActiveAndroid.setTransactionSuccessful();
+                            long delta = System.currentTimeMillis() - startTime;
+                            Log.d(TAG, "** Cache Cleanup took " + delta + "ms ***");
                         }
-                        ActiveAndroid.setTransactionSuccessful();
-                        long delta = System.currentTimeMillis() - startTime;
-                        Log.d(TAG, "** Cache Trimming took " + delta + "ms ***");
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "", e);

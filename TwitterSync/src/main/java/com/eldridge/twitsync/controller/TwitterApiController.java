@@ -154,8 +154,7 @@ public class TwitterApiController {
     }
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
-        ResponseList<Status> tweets = (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
-        return tweets;
+        return  (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
     }
 
 }
