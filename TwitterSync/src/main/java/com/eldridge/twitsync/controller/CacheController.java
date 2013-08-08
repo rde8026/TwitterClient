@@ -115,7 +115,7 @@ public class CacheController {
 
     public List<Status> getLatestCachedTweets() throws Exception {
         long startTime = System.currentTimeMillis();
-        List<Tweet> cachedTweets = getCachedTweets("timestamp DESC");
+        List<Tweet> cachedTweets = new Select().from(Tweet.class).orderBy("Id ASC").execute();
         List<Status> tweets = new ArrayList<Status>();
         for (Tweet t : cachedTweets) {
             Status s = DataObjectFactory.createStatus(t.json);
