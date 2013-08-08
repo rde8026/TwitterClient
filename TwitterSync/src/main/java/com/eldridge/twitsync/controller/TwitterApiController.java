@@ -39,7 +39,7 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 50;
+    private static final int COUNT = 30;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -116,7 +116,7 @@ public class TwitterApiController {
                     paging.setCount(COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
-                    CacheController.getInstance(context).addToCache(tweets);
+                    CacheController.getInstance(context).addToCache(tweets, false);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -134,7 +134,7 @@ public class TwitterApiController {
                     paging.setSinceId(statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
-                    CacheController.getInstance(context).addToCache(tweets);
+                    CacheController.getInstance(context).addToCache(tweets, true);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -149,7 +149,7 @@ public class TwitterApiController {
         paging.setMaxId(statusId);
         paging.setCount(COUNT * 2);
         ResponseList<Status> tweets = getPagedTweets(paging);
-        CacheController.getInstance(context).addToCache(tweets);
+        CacheController.getInstance(context).addToCache(tweets, false);
         return tweets;
     }
 

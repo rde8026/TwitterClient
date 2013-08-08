@@ -138,7 +138,9 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
                     pullToRefreshAttacher.setRefreshComplete();
                     showListView();
                 }
-                endlessTweetsAdapter.notifyDataSetChanged();
+                if (endlessTweetsAdapter != null) {
+                    endlessTweetsAdapter.notifyDataSetChanged();
+                }
             }
         });
     }

@@ -29,13 +29,16 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 51;
+    private static final int CACHE_SIZE = 251;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
+    private static ArrayList<Tweet> memoryCache;
 
     private CacheController() {
         executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        memoryCache = new ArrayList<Tweet>();
+        ActiveAndroid.setLoggingEnabled(true);
     }
 
     public static CacheController getInstance(Context context) {
@@ -48,28 +51,23 @@ public class CacheController {
         return instance;
     }
 
-    public void addToCache(final ResponseList<Status> items) {
-        ActiveAndroid.beginTransaction();
+    public void addToCache(final ResponseList<Status> items, boolean top) {
         try {
             long startTime = System.currentTimeMillis();
             for (Status s : items) {
-                if (checkTweetsExistence(s)) {
-                    Tweet tweet = new Tweet();
-                    tweet.tweetId = s.getId();
-                    tweet.timestamp = s.getCreatedAt().getTime();//System.currentTimeMillis();
-                    tweet.json = DataObjectFactory.getRawJSON(s);
-                    tweet.save();
-                }
+                Tweet tweet = new Tweet();
+                tweet.tweetId = s.getId();
+                tweet.timestamp = s.getCreatedAt().getTime();
+                tweet.json = DataObjectFactory.getRawJSON(s);
+                addTweetToMemoryCache(tweet, top);
             }
-            ActiveAndroid.setTransactionSuccessful();
             if (BuildConfig.DEBUG) {
                 long delta = System.currentTimeMillis() - startTime;
-                Log.d(TAG, "** Cached " + items.size() + " to DB in " + delta + "ms **");
+                //Log.d(TAG, "** Cached " + items.size() + " to DB in " + delta + "ms **");
+                Log.d(TAG, "** Insert into memory cache took " + delta + " ms **");
             }
         } catch (IOException ioe) {
             Log.e(TAG, "", ioe);
-        } finally {
-            ActiveAndroid.endTransaction();
         }
     }
 
@@ -78,32 +76,55 @@ public class CacheController {
         return existing == null;
     }
 
+    private void addTweetToMemoryCache(Tweet t, boolean top) throws IOException {
+        if (!memoryCache.contains(t)) {
+            if (top) {
+                memoryCache.add(0, t);
+            } else {
+                memoryCache.add(t);
+            }
+        }
+    }
+
     public void trimCache() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "** Checking Cache size **");
-                ActiveAndroid.beginTransaction();
+                deleteDbRecords();
                 try {
-                    //List<Tweet> top = new Select().from(Tweet.class).limit(CACHE_SIZE).execute();
-                    List<Tweet> top = new Select().from(Tweet.class).orderBy("timestamp ASC").limit(CACHE_SIZE).execute();
-                    if (top != null && !top.isEmpty()) {
-                        List<Tweet> outliers = new Select().from(Tweet.class).where("Id >= " + top.get(top.size() - 1).getId()).execute();
-                        if (outliers != null && !outliers.isEmpty()) {
-                            long startTime = System.currentTimeMillis();
-                            Log.d(TAG, "** Removing " + outliers.size() + " from Cache **");
-                            for (Tweet t : outliers) {
-                                t.delete();
+                    ActiveAndroid.beginTransaction();
+                    if (BuildConfig.DEBUG) {
+                        Log.d(TAG, "** Persistent Cache cleared **");
+                        Log.d(TAG, "** Loading " + memoryCache.size() + " to persistent cache **");
+                    }
+                    Log.d(TAG, "** Memory Cache Size: " + memoryCache.size() + " **");
+                    for (int i = 0; i < memoryCache.size(); i++) {
+                        if (i <= CACHE_SIZE) {
+                            Tweet t = memoryCache.get(i);
+                            //TODO: Fix this issue - either don't drop the entire DB or figure out a way to deal w/ the Id being populated.
+                            if (t.getId() != null) {
+                                Tweet hackForUpdate = new Tweet();
+                                hackForUpdate.timestamp = t.timestamp;
+                                hackForUpdate.tweetId = t.tweetId;
+                                hackForUpdate.json = t.json;
+                                hackForUpdate.save();
+                            } else {
+                                t.save();
                             }
-                            ActiveAndroid.setTransactionSuccessful();
-                            long delta = System.currentTimeMillis() - startTime;
-                            Log.d(TAG, "** Cache Cleanup took " + delta + "ms ***");
+                        } else {
+                            break;
                         }
                     }
+                    ActiveAndroid.setTransactionSuccessful();
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 } finally {
                     ActiveAndroid.endTransaction();
+                    if (BuildConfig.DEBUG) {
+                        List<Tweet> ts = new Select().from(Tweet.class).execute();
+                        Log.d(TAG, "********** Cache Count is " + ts.size() + " **********");
+                    }
+                    memoryCache.clear();
                 }
             }
         });
@@ -116,6 +137,7 @@ public class CacheController {
         for (Tweet t : cachedTweets) {
             Status s = DataObjectFactory.createStatus(t.json);
             tweets.add(s);
+            memoryCache.add(t);
         }
         long delta = System.currentTimeMillis() - startTime;
         if (BuildConfig.DEBUG) {
@@ -125,12 +147,19 @@ public class CacheController {
         return tweets;
     }
 
+    private void deleteDbRecords() {
+        ActiveAndroid.beginTransaction();
+        new Delete().from(Tweet.class).execute();
+        ActiveAndroid.setTransactionSuccessful();
+        ActiveAndroid.endTransaction();
+    }
 
     public void clearDb() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 new Delete().from(Tweet.class).execute();
+                memoryCache.clear();
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "*** Deleted ALL from cache db ***");
                 }
