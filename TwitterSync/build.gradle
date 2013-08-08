@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:support-v4:13.0.+'
     compile project(':libraries:actionbarsherlock')
     compile project(':libraries:pulltorefresh')
+    compile project(':libraries:google-play-services_lib')
 
     //SignPost
     compile files('libs/signpost-commonshttp4-1.2.1.2.jar')
