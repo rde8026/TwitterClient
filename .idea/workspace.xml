@@ -36,7 +36,226 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="131cae47-62ec-4f6f-848a-5aeabf3d72d6" name="Default" comment="" />
+    <list default="true" id="131cae47-62ec-4f6f-848a-5aeabf3d72d6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/libs/gson-2.2.4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/GcmController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/RegistrationEndpoint.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/payload/RegistrationPayload.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/RestController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/receiver/UpdateReceiver.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/google_play_services.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_2_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/PreferenceController.java" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/PreferenceController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java" afterPath="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/build.gradle" afterPath="$PROJECT_DIR$/TwitterSync/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/google-play-services_lib/build.gradle" afterPath="$PROJECT_DIR$/libraries/google-play-services_lib/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/google-play-services_lib/google-play-services_lib.iml" afterPath="$PROJECT_DIR$/libraries/google-play-services_lib/google-play-services_lib.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <list id="3bfedd93-470b-44ff-b286-4565f3a7c3e6" name="NOCOMMIT" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/source/r/debug/com/actionbarsherlock/R.java" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/source/r/debug/com/actionbarsherlock/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/source/r/release/com/actionbarsherlock/R.java" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/source/r/release/com/actionbarsherlock/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/source/r/debug/uk/co/senab/actionbarpulltorefresh/library/R.java" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/source/r/debug/uk/co/senab/actionbarpulltorefresh/library/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/source/r/release/uk/co/senab/actionbarpulltorefresh/library/R.java" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/source/r/release/uk/co/senab/actionbarpulltorefresh/library/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterSync/TwitterSync.iml" afterPath="$PROJECT_DIR$/TwitterSync/TwitterSync.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_home.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_tab.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_tab.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_tab.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_tab_bar_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_tab_bar_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_tab_bar_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_bar_title_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_title_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_bar_title_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_menu_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_menu_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_menu_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_mode_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_mode_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_mode_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-large/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-large/abs__action_mode_close_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-large/abs__action_mode_close_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__activated_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__activated_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__activated_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__activated_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__activated_background_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__activated_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__activity_chooser_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__activity_chooser_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__activity_chooser_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__activity_chooser_view_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__activity_chooser_view_list_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__activity_chooser_view_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__btn_cab_done_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__btn_cab_done_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__btn_cab_done_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__btn_cab_done_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__btn_cab_done_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__btn_cab_done_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_clear.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_clear.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_clear.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_clear_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_clear_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_clear_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_menu_moreoverflow_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_menu_moreoverflow_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__ic_menu_moreoverflow_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__item_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__item_background_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__item_background_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__item_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__item_background_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__item_background_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_checkbox.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_checkbox.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_checkbox.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_icon.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_icon.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_icon.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__list_menu_item_radio.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_radio.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__list_menu_item_radio.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_background_transition_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_background_transition_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_background_transition_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_background_transition_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_background_transition_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__list_selector_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__list_selector_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__popup_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__popup_menu_item_layout.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__popup_menu_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_disable_only_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_disable_only_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_disable_only_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_disable_only_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_disable_only_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_disable_only_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/color/abs__primary_text_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/color/abs__primary_text_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_horizontal_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_horizontal_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_horizontal_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_horizontal_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_horizontal_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_horizontal_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable-v11/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable-v11/abs__progress_medium_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable-v11/abs__progress_medium_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-xlarge/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-xlarge/abs__screen_action_bar.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-xlarge/abs__screen_action_bar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-xlarge/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-xlarge/abs__screen_action_bar_overlay.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-xlarge/abs__screen_action_bar_overlay.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_simple.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__screen_simple_overlay_action_mode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_simple_overlay_action_mode.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__screen_simple_overlay_action_mode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__search_dropdown_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__search_dropdown_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__search_dropdown_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__search_dropdown_item_icons_2line.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__search_dropdown_item_icons_2line.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__search_dropdown_item_icons_2line.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__search_dropdown_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__search_dropdown_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__search_dropdown_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__search_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__search_view.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__search_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/abs__simple_dropdown_hint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__simple_dropdown_hint.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/abs__simple_dropdown_hint.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__spinner_ab_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__spinner_ab_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__spinner_ab_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__spinner_ab_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__spinner_ab_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__spinner_ab_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__tab_indicator_ab_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__tab_indicator_ab_holo.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__tab_indicator_ab_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_right_holo_dark.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_right_holo_dark.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/drawable/abs__textfield_searchview_right_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_right_holo_light.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/drawable/abs__textfield_searchview_right_holo_light.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/layout/default_header.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/layout/default_header.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/layout/default_header.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/layout/default_header.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/anim/fade_in.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/anim/fade_in.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/anim/fade_in.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/anim/fade_in.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/anim/fade_out.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/anim/fade_out.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/anim/fade_out.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/anim/fade_out.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/drawable/ptr_progress_horizontal_holo_center.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/drawable/ptr_progress_horizontal_holo_center.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/drawable/ptr_progress_horizontal_holo_center.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/drawable/ptr_progress_horizontal_holo_center.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/drawable/ptr_progress_indeterminate_horizontal_holo.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/drawable/ptr_progress_indeterminate_horizontal_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/drawable/ptr_progress_indeterminate_horizontal_holo.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/drawable/ptr_progress_indeterminate_horizontal_holo.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-v14/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-v14/sherlock_spinner_dropdown_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-v14/sherlock_spinner_dropdown_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/layout-v14/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-v14/sherlock_spinner_item.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/layout-v14/sherlock_spinner_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-land/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-land/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-land-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-land-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-large-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-sw600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-v11/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-v11/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-v14/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-v14/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w360dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w480dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w500dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-w600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/debug/values-xlarge/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-land/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-land/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-land-hdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-land-hdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-land-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-land-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-mdpi-1024x600/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-large-mdpi-1024x600/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-sw600dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-sw600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-v11/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-v11/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-v14/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-v14/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w360dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w360dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w480dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w480dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w500dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w500dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w600dp/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-w600dp/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-xlarge/values.xml" afterPath="$PROJECT_DIR$/libraries/actionbarsherlock/build/res/all/release/values-xlarge/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ar/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ar/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-cs/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-cs/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-de/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-de/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-es/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-es/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-fi/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-fi/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-fr/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-fr/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-he/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-he/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-it/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-it/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-iw/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-iw/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ja/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ja/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ko/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ko/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-nl/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-nl/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pl/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pl/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pt/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pt/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pt-rBR/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-pt-rBR/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ro/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ro/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ru/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-ru/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-zh/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/debug/values-zh/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ar/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ar/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-cs/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-cs/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-de/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-de/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-es/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-es/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-fi/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-fi/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-fr/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-fr/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-he/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-he/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-it/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-it/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-iw/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-iw/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ja/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ja/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ko/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ko/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-nl/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-nl/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pl/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pl/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pt/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pt/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pt-rBR/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-pt-rBR/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ro/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ro/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ru/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-ru/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-zh/values.xml" afterPath="$PROJECT_DIR$/libraries/pulltorefresh/build/res/all/release/values-zh/values.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    </list>
     <ignored path="TwitterSync.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -102,42 +321,80 @@
       <file leaf-file-name="TweetsFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="110" selection-start="2023" selection-end="2023" vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2505">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CacheController.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/CacheController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="0" selection-start="2928" selection-end="2928" vertical-scroll-proportion="0.93406594" vertical-offset="530" max-vertical-offset="1965">
+            <state line="113" column="0" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2355">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1461#2244#0" expanded="true" />
-                <element signature="e#2233#2234#0" expanded="true" />
-                <element signature="e#2317#3209#0" expanded="true" />
-                <element signature="e#2741#2749#0" expanded="true" />
-                <element signature="e#3198#3199#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3683#5189#0" expanded="false" />
+                <element signature="e#5178#5179#0" expanded="false" />
+                <element signature="e#5322#5768#0" expanded="false" />
+                <element signature="e#5757#5758#0" expanded="false" />
+                <element signature="e#5904#6226#0" expanded="false" />
+                <element signature="e#6215#6216#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TwitterApiController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/TwitterApiController.java">
+      <file leaf-file-name="GcmController.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/GcmController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="35" selection-start="5071" selection-end="5071" vertical-scroll-proportion="0.0" vertical-offset="860" max-vertical-offset="1770">
+            <state line="82" column="0" selection-start="3321" selection-end="3321" vertical-scroll-proportion="1.8136439" vertical-offset="140" max-vertical-offset="1830">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1555#4293#0" expanded="true" />
+                <element signature="e#4282#4283#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PreferenceController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/PreferenceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="131" column="36" selection-start="5210" selection-end="5230" vertical-scroll-proportion="0.0" vertical-offset="1175" max-vertical-offset="2085">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tweet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/db/Tweet.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="25" selection-start="504" selection-end="513" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+            <state line="96" column="74" selection-start="3664" selection-end="3664" vertical-scroll-proportion="0.0" vertical-offset="635" max-vertical-offset="1560">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegistrationEndpoint.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/RegistrationEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="92" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegistrationPayload.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/payload/RegistrationPayload.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="71" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/RestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="61" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -148,6 +405,14 @@
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="tasksExpandState">
@@ -207,6 +472,10 @@
                 <option name="path" value="$PROJECT_DIR$/libraries/pulltorefresh" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
+                <option name="name" value="google-play-services_lib" />
+                <option name="path" value="$PROJECT_DIR$/libraries/google-play-services_lib" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
                 <option name="name" value="TwitterSync" />
                 <option name="path" value="$PROJECT_DIR$/TwitterSync" />
               </ExternalProjectPojo>
@@ -217,29 +486,29 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1375840018000" />
+        <entry key="$PROJECT_DIR$" value="1375875992000" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/util/Linkify.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/util/Regex.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/res/layout/tweet_item_layout.xml" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/util/LinkifyWithTwitter.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/adapter/TweetsAdapter.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/adapter/EndlessTweetsAdapter.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/res/raw/ormlite_config.txt" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/app/TwitSyncApplication.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/DatabaseController.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java" />
-        <option value="$PROJECT_DIR$/TwitterSync/build.gradle" />
-        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/TwitterApiController.java" />
         <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/db/Tweet.java" />
         <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/CacheController.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/service/UpdateService.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/libraries/google-play-services_lib/build.gradle" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/TwitterApiController.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/PreferenceController.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/receiver/UpdateReceiver.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/payload/RegistrationPayload.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/build.gradle" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/RegistrationEndpoint.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/GcmController.java" />
+        <option value="$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/RestController.java" />
       </list>
     </option>
   </component>
@@ -271,7 +540,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -297,7 +566,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -344,6 +612,266 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="endpoints" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="endpoints" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="payload" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="receiver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitsync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -364,6 +892,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -376,7 +905,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="003ca935d00a0a7a" />
     <property name="DEBUGGABLE_DEVICE" value="003ca935d00a0a7a" />
@@ -388,8 +917,8 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -557,6 +1086,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="131cae47-62ec-4f6f-848a-5aeabf3d72d6" name="Default" comment="" />
+      <changelist id="3bfedd93-470b-44ff-b286-4565f3a7c3e6" name="NOCOMMIT" comment="" />
       <created>1375444526738</created>
       <updated>1375444526738</updated>
     </task>
@@ -584,10 +1114,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="38" y="22" width="1871" height="1058" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3827292" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -602,8 +1132,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20383562" sideWeight="0.61727077" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3132948" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20383562" sideWeight="0.6705757" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31236672" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -674,109 +1204,136 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/TwitterSync/libs/twitter4j-core-3.0.3.jar!/twitter4j/Status.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="97" selection-start="221" selection-end="236" vertical-scroll-proportion="0.092364535" vertical-offset="0" max-vertical-offset="812" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/adapter/EndlessTweetsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="39" selection-start="2282" selection-end="2282" vertical-scroll-proportion="0.8207885" vertical-offset="138" max-vertical-offset="975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/app/ActivityManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="16" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.33333334" vertical-offset="156" max-vertical-offset="3015" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="46" selection-start="748" selection-end="748" vertical-scroll-proportion="0.3405018" vertical-offset="0" max-vertical-offset="837">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/DatabaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/app/TwitSyncApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="0.017921148" vertical-offset="0" max-vertical-offset="837" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/TwitterSync/libs/twitter4j-core-3.0.3.jar!/twitter4j/TwitterResponse.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="156" selection-end="156" vertical-scroll-proportion="0.092364535" vertical-offset="0" max-vertical-offset="812" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/TwitterSync/libs/twitter4j-core-3.0.3.jar!/twitter4j/ResponseList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="68" selection-start="192" selection-end="207" vertical-scroll-proportion="0.092364535" vertical-offset="0" max-vertical-offset="812" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="110" selection-start="2023" selection-end="2023" vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="2505">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="910">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="910">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="910">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="15" selection-start="837" selection-end="837" vertical-scroll-proportion="0.64285713" vertical-offset="0" max-vertical-offset="910">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/db/Tweet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="25" selection-start="504" selection-end="513" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+        <state line="21" column="0" selection-start="504" selection-end="513" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="525">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/TwitterApiController.java">
+    <entry file="file://$PROJECT_DIR$/libraries/google-play-services_lib/src/android/UnusedStub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="35" selection-start="5071" selection-end="5071" vertical-scroll-proportion="0.0" vertical-offset="860" max-vertical-offset="1770">
+        <state line="18" column="19" selection-start="715" selection-end="715" vertical-scroll-proportion="0.06593407" vertical-offset="0" max-vertical-offset="910">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libraries/google-play-services_lib/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="44" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/CacheController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="0" selection-start="2928" selection-end="2928" vertical-scroll-proportion="0.93406594" vertical-offset="530" max-vertical-offset="1965">
+        <state line="33" column="4" selection-start="844" selection-end="891" vertical-scroll-proportion="0.54395604" vertical-offset="0" max-vertical-offset="2610">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1461#2244#0" expanded="true" />
-            <element signature="e#2233#2234#0" expanded="true" />
-            <element signature="e#2317#3209#0" expanded="true" />
-            <element signature="e#2741#2749#0" expanded="true" />
-            <element signature="e#3198#3199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/java/lang/Integer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="28" selection-start="324" selection-end="324" vertical-scroll-proportion="0.115384616" vertical-offset="0" max-vertical-offset="1320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/TwitterApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="86" selection-start="2716" selection-end="2716" vertical-scroll-proportion="0.2912088" vertical-offset="560" max-vertical-offset="1965">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/fragment/TweetsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="0" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2355">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3683#5189#0" expanded="false" />
+            <element signature="e#5178#5179#0" expanded="false" />
+            <element signature="e#5322#5768#0" expanded="false" />
+            <element signature="e#5757#5758#0" expanded="false" />
+            <element signature="e#5904#6226#0" expanded="false" />
+            <element signature="e#6215#6216#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="61" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.8901099" vertical-offset="0" max-vertical-offset="1050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/receiver/UpdateReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="67" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.44505495" vertical-offset="0" max-vertical-offset="910">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/payload/RegistrationPayload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="71" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/PreferenceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="131" column="36" selection-start="5210" selection-end="5230" vertical-scroll-proportion="0.0" vertical-offset="1175" max-vertical-offset="2085">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="74" selection-start="3664" selection-end="3664" vertical-scroll-proportion="0.0" vertical-offset="635" max-vertical-offset="1560">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="40" selection-start="819" selection-end="819" vertical-scroll-proportion="0.6098901" vertical-offset="0" max-vertical-offset="915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/rest/endpoints/RegistrationEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="92" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/RestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="61" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterSync/src/main/java/com/eldridge/twitsync/controller/GcmController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="0" selection-start="3321" selection-end="3321" vertical-scroll-proportion="1.8136439" vertical-offset="140" max-vertical-offset="1830">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1555#4293#0" expanded="true" />
+            <element signature="e#4282#4283#0" expanded="true" />
           </folding>
         </state>
       </provider>

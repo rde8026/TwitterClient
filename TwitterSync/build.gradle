@@ -35,6 +35,7 @@ dependencies {
 
     //Square Helpers
     compile files('libs/retrofit-1.1.1.jar')
+    compile files('libs/gson-2.2.4.jar')
     compile files('libs/square-otto-1.3.5-SNAPSHOT.jar')
     compile files('libs/picasso-1.1.1.jar')
 

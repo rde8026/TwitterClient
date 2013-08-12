@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -95,6 +94,7 @@ public class MainActivity extends SherlockFragmentActivity {
             BusController.getInstance().postMessage(new ScrollMessage(false));
         } else if (item.getItemId() == R.id.action_delete_db) {
             CacheController.getInstance(this).clearDb();
+            PreferenceController.getInstance(this).clearGcmRegistration();
         }
         return super.onMenuItemSelected(featureId, item);
     }
