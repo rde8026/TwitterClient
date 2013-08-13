@@ -6,11 +6,18 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
+
+    <permission android:name="com.eldridge.twitsync.permission.C2D_MESSAGE"
+                android:protectionLevel="signature" />
+    <uses-permission android:name="com.eldridge.twitsync.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +46,14 @@
                 <data android:host="twittersync" android:scheme="callback"/>
             </intent-filter>
         </activity>
+
+        <receiver android:name=".receiver.UpdateReceiver" android:exported="true"
+                  android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.eldridge.twitsync" />
+            </intent-filter>
+        </receiver>
 
 
         <meta-data android:name="AA_DB_NAME" android:value="twitsync.db" />
