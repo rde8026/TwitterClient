@@ -1,1 +1,1 @@
-include ':TwitterSync', ':libraries:actionbarsherlock', ':libraries:pulltorefresh', ':'
+include ':TwitterSync', ':libraries:actionbarsherlock', ':libraries:pulltorefresh', ':libraries:google-play-services_lib', ':'
