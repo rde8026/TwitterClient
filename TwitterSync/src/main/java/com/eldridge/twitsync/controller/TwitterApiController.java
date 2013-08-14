@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.eldridge.twitsync.BuildConfig;
-import com.eldridge.twitsync.db.Tweet;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
