@@ -31,17 +31,15 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 41;
+    private static final int CACHE_SIZE = 300;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
-    private static ArrayList<Tweet> memoryCache;
 
     private static ArrayDeque<Tweet> deque;
 
     private CacheController() {
         executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        memoryCache = new ArrayList<Tweet>();
         deque = new ArrayDeque<Tweet>();
         ActiveAndroid.setLoggingEnabled(true);
     }
@@ -56,25 +54,20 @@ public class CacheController {
         return instance;
     }
 
-    public synchronized void addToCache(final ResponseList<Status> items, boolean top) {
+    public synchronized void addToCache(final ResponseList<Status> items, boolean front) {
         try {
+            deque.size();
             long startTime = System.currentTimeMillis();
-            if (top) {
-                for (Status s : items) {
-                    Tweet tweet = new Tweet();
-                    tweet.tweetId = s.getId();
-                    tweet.timestamp = s.getCreatedAt().getTime();
-                    tweet.json = DataObjectFactory.getRawJSON(s);
-                    addTweetToMemoryCache(tweet, top);
-                }
-            } else {
+            //If we are adding Tweets to the front of the cache they need to be in the
+            //reverse order of how they will be presented in the list so our cache is properly ordered
+            if (front) {
                 for (int i = items.size() - 1; i >= 0; i--) {
                     Status s = items.get(i);
-                    Tweet tweet = new Tweet();
-                    tweet.tweetId = s.getId();
-                    tweet.timestamp = s.getCreatedAt().getTime();
-                    tweet.json = DataObjectFactory.getRawJSON(s);
-                    addTweetToMemoryCache(tweet, top);
+                    addTweetToMemoryCache(createTweetObject(s), front);
+                }
+            } else {
+                for (Status s : items) {
+                    addTweetToMemoryCache(createTweetObject(s), front);
                 }
             }
             if (BuildConfig.DEBUG) {
@@ -87,14 +80,17 @@ public class CacheController {
         }
     }
 
-    private boolean checkTweetsExistence(Status s) throws IOException {
-        Tweet existing = new Select().from(Tweet.class).where("tweetId = ?", s.getId()).executeSingle();
-        return existing == null;
+    private Tweet createTweetObject(Status s) {
+        Tweet tweet = new Tweet();
+        tweet.tweetId = s.getId();
+        tweet.timestamp = s.getCreatedAt().getTime();
+        tweet.json = DataObjectFactory.getRawJSON(s);
+        return tweet;
     }
 
-    private synchronized void addTweetToMemoryCache(Tweet t, boolean top) throws IOException {
-        if (!memoryCache.contains(t)) {
-            if (top) {
+    private synchronized void addTweetToMemoryCache(Tweet t, boolean front) throws IOException {
+        if (!deque.contains(t)) {
+            if (front) {
                 deque.addFirst(t);
             } else {
                 deque.addLast(t);
@@ -146,7 +142,6 @@ public class CacheController {
                         List<Tweet> ts = new Select().from(Tweet.class).execute();
                         Log.d(TAG, "********** Cache Count is " + ts.size() + " **********");
                     }
-                    //memoryCache.clear();
                     deque.clear();
                 }
             }
@@ -155,19 +150,32 @@ public class CacheController {
 
     public synchronized List<Status> getLatestCachedTweets() throws Exception {
         long startTime = System.currentTimeMillis();
-        List<Tweet> cachedTweets = new Select().from(Tweet.class).execute(); //.orderBy("Id ASC")
+        List<Tweet> cachedTweets = new Select().from(Tweet.class).execute();
         List<Status> tweets = new ArrayList<Status>();
+
         for (Tweet t : cachedTweets) {
             Status s = DataObjectFactory.createStatus(t.json);
             tweets.add(s);
-            //memoryCache.add(t);
-            deque.addFirst(t);
+            deque.addLast(t);
         }
+
         long delta = System.currentTimeMillis() - startTime;
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "**** Cache returned and converted " + cachedTweets.size() + " in " + delta + " ms");
             Log.d(TAG, "**** Cached returned and converted " + cachedTweets.size() + " in " + delta / 1000 + " s");
         }
+
+        /*if (deque != null && !deque.isEmpty()) {
+            Iterator<Tweet> iterator = deque.iterator();
+            while (iterator.hasNext()) {
+                Tweet t = iterator.next();
+                Status s = DataObjectFactory.createStatus(t.json);
+                tweets.add(s);
+            }
+        } else {
+            Log.d(TAG, "******* DEQUE IS DEAD OR EMPTY ********");
+        }*/
+
         return tweets;
     }
 
@@ -183,17 +191,12 @@ public class CacheController {
             @Override
             public void run() {
                 new Delete().from(Tweet.class).execute();
-                //memoryCache.clear();
                 deque.clear();
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "*** Deleted ALL from cache db ***");
                 }
             }
         });
-    }
-
-    private List<Tweet> getCachedTweets(String sort) {
-        return new Select().from(Tweet.class).orderBy(sort).execute();
     }
 
 }
