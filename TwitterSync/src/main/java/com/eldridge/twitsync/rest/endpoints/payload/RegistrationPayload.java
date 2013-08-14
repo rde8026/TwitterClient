@@ -9,16 +9,16 @@ public class RegistrationPayload implements Serializable {
 
     private String registrationId;
     private String deviceId;
-    private String userId;
+    private String twitterId;
 
     public RegistrationPayload() {
 
     }
 
-    public RegistrationPayload(String registrationId, String deviceId, String userId) {
+    public RegistrationPayload(String registrationId, String deviceId, String twitterId) {
         this.registrationId = registrationId;
         this.deviceId = deviceId;
-        this.userId = userId;
+        this.twitterId = twitterId;
     }
 
     public String getRegistrationId() {
@@ -37,11 +37,12 @@ public class RegistrationPayload implements Serializable {
         this.deviceId = deviceId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getTwitterId() {
+        return twitterId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setTwitterId(String twitterId) {
+        this.twitterId = twitterId;
     }
+
 }
