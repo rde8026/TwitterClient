@@ -1,10 +1,13 @@
 package com.eldridge.twitsync.service;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.eldridge.twitsync.controller.TwitterApiController;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 /**
@@ -21,6 +24,7 @@ public class GcmIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
+        final Context context = this;
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 
         String messageType = gcm.getMessageType(intent);
@@ -31,8 +35,18 @@ public class GcmIntentService extends IntentService {
             Log.d(TAG, "** Deleted Message on Server ***");
         } else {
             if (extras != null && !extras.isEmpty()) {
-                String lastMessage = extras.getString("messageId");
-                Log.d(TAG, "***************** Last Message: " + lastMessage + " **********************");
+                final String lastMessage = extras.getString("messageId");
+                Log.d(TAG, "** Received Notification that another device has read further along - updating **");
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        if (!"".equalsIgnoreCase(lastMessage)) {
+                            TwitterApiController.getInstance(context).syncFromGcm(Long.valueOf(lastMessage));
+                        }
+                        return null;
+                    }
+                }.execute();
             }
         }
 
