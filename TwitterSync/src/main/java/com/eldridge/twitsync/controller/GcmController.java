@@ -7,6 +7,7 @@ import android.util.Log;
 import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.rest.endpoints.RegistrationEndpoint;
 import com.eldridge.twitsync.rest.endpoints.payload.RegistrationPayload;
+import com.eldridge.twitsync.util.Utils;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class GcmController {
                             Log.d(TAG, "** Registration is null - attempting to register now **");
                             regId = registerGcm();
 
-                            String uniqueDeviceId = getUniqueDeviceId();
+                            String uniqueDeviceId = Utils.getUniqueDeviceId(context);
 
                             RestAdapter adapter = RestController.getInstance(context).getRestAdapter();
                             RegistrationEndpoint registrationEndpoint = adapter.create(RegistrationEndpoint.class);
@@ -108,10 +109,6 @@ public class GcmController {
 
     private String registerGcm() throws IOException {
         return GoogleCloudMessaging.getInstance(context).register(PROJECT_ID);
-    }
-
-    private String getUniqueDeviceId() {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 }
