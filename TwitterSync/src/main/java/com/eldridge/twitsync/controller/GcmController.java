@@ -65,30 +65,30 @@ public class GcmController {
                         int registeredVersion = PreferenceController.getInstance(context).getGcmRegisteredVersion();
                         int currentVersion = PreferenceController.getInstance(context).getAppVersion();
 
-                        if (regId.length() == 0) {
+                        if ( regId.length() == 0 || registeredVersion != currentVersion || PreferenceController.getInstance(context).isRegistrationExpired() ) {
                             Log.d(TAG, "** Registration is null - attempting to register now **");
                             regId = registerGcm();
-                        } else if (registeredVersion != currentVersion || PreferenceController.getInstance(context).isRegistrationExpired()) {
-                            regId = registerGcm();
+
+                            String uniqueDeviceId = getUniqueDeviceId();
+
+                            RestAdapter adapter = RestController.getInstance(context).getRestAdapter();
+                            RegistrationEndpoint registrationEndpoint = adapter.create(RegistrationEndpoint.class);
+                            registrationEndpoint.registerDevice(new RegistrationPayload(regId, uniqueDeviceId, String.valueOf(userId)), new Callback<Response>() {
+                                @Override
+                                public void success(Response response, Response response2) {
+                                    Log.d(TAG, "**** OK GOT A SUCCESS ****");
+                                    PreferenceController.getInstance(context).saveGcmRegistration(regId);
+                                }
+
+                                @Override
+                                public void failure(RetrofitError retrofitError) {
+                                    Log.d(TAG, "**** FAILURE ****");
+                                    Log.e(TAG, "*** Retro Error: " + retrofitError.getMessage() + " ***");
+                                }
+                            });
+
                         }
 
-                        //TODO: Send the Registration to our server!
-                        String uniqueDeviceId = getUniqueDeviceId();
-
-                        RestAdapter adapter = RestController.getInstance(context).getRestAdapter();
-                        RegistrationEndpoint registrationEndpoint = adapter.create(RegistrationEndpoint.class);
-                        registrationEndpoint.registerDevice(new RegistrationPayload(regId, uniqueDeviceId, String.valueOf(userId)), new Callback<Response>() {
-                            @Override
-                            public void success(Response response, Response response2) {
-                                Log.d(TAG, "**** OK GOT A SUCCESS ****");
-                                PreferenceController.getInstance(context).saveGcmRegistration(regId);
-                            }
-
-                            @Override
-                            public void failure(RetrofitError retrofitError) {
-                                Log.d(TAG, "**** FAILURE ****");
-                            }
-                        });
 
                         long delta = System.currentTimeMillis() - startTime;
                         if (BuildConfig.DEBUG) {
