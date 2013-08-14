@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.eldridge.twitsync.BuildConfig;
+import com.eldridge.twitsync.db.Tweet;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
@@ -161,6 +162,32 @@ public class TwitterApiController {
         }
         CacheController.getInstance(context).addToCache(tweets, false);
         return tweets;
+    }
+
+    public void syncFromGcm(Long messageId) {
+        try {
+            List<Status> cachedTweets = CacheController.getInstance(context).getLatestCachedTweets();
+            Paging paging = new Paging();
+            if (cachedTweets != null && !cachedTweets.isEmpty()) {
+                Status s = cachedTweets.get(0);
+                paging.setSinceId(s.getId());
+                paging.setMaxId(messageId);
+
+                ResponseList<Status> tweets = getPagedTweets(paging);
+                CacheController.getInstance(context).addToCache(tweets, true);
+
+            } else {
+                paging.setMaxId(messageId);
+                paging.setCount(COUNT);
+                ResponseList<Status> tweets = getPagedTweets(paging);
+                CacheController.getInstance(context).addToCache(tweets, false);
+            }
+
+            CacheController.getInstance(context).trimCache();
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating Tweets from Gcm");
+            Log.e(TAG, "", e);
+        }
     }
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
