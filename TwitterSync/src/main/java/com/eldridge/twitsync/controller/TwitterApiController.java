@@ -11,7 +11,6 @@ import com.eldridge.twitsync.rest.endpoints.StatusEndpoint;
 import com.eldridge.twitsync.rest.endpoints.payload.StatusUpdatePayload;
 import com.eldridge.twitsync.util.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,7 +29,6 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
-import twitter4j.json.DataObjectFactory;
 
 /**
  * Created by ryaneldridge on 8/4/13.
@@ -46,7 +44,7 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 30;
+    private static final int COUNT = 50;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -123,7 +121,7 @@ public class TwitterApiController {
                     paging.setCount(COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     updateServerWithLatestMessage(tweets);
-                    BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
+                    BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true));
                     CacheController.getInstance(context).addToCache(tweets, false);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
@@ -156,8 +154,11 @@ public class TwitterApiController {
     public ResponseList<Status> syncGetUserTimeLineHistory(final Long statusId) throws TwitterException {
         Paging paging = new Paging();
         paging.setMaxId(statusId);
-        paging.setCount(COUNT * 2);
+        paging.setCount(COUNT);
         ResponseList<Status> tweets = getPagedTweets(paging);
+        if (tweets != null && !tweets.isEmpty()) {
+            tweets.remove(0);
+        }
         CacheController.getInstance(context).addToCache(tweets, false);
         return tweets;
     }
