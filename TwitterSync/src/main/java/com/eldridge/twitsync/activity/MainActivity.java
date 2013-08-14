@@ -95,6 +95,7 @@ public class MainActivity extends SherlockFragmentActivity {
             BusController.getInstance().postMessage(new ScrollMessage(false));
         } else if (item.getItemId() == R.id.action_delete_db) {
             CacheController.getInstance(this).clearDb();
+            PreferenceController.getInstance(this).clearGcmRegistration();
         }
         return super.onMenuItemSelected(featureId, item);
     }
