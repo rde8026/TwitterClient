@@ -88,7 +88,6 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     @Subscribe
     public void userMessage(TwitterUserMessage twitterUserMessage) {
         Log.d(TAG, "*** Requesting Users TimeLine ***");
-        GcmController.getInstance(getSherlockActivity().getApplicationContext()).registerDevice();
         TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserTimeLine();
     }
 
@@ -111,9 +110,6 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
 
                 if (timelineUpdateMessage.isRefresh()) {
                     if (timelineUpdateMessage.getTweets() != null && timelineUpdateMessage.getTweets().size() > 0 && timelineUpdateMessage.isPrepend()) {
-                        /*for (Status s : timelineUpdateMessage.getTweets()) {
-                            adapter.insert(s, 0);
-                        }*/
 
                         for (int i = timelineUpdateMessage.getTweets().size() - 1; i >= 0; i--) {
                             Status s = timelineUpdateMessage.getTweets().get(i);
