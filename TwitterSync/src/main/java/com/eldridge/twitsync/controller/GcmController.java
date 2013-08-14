@@ -71,7 +71,12 @@ public class GcmController {
                             regId = registerGcm();
 
                             String uniqueDeviceId = Utils.getUniqueDeviceId(context);
+                            Log.d(TAG, "************ Device ID: " + uniqueDeviceId + " ************");
+                            Log.d(TAG, "************ REG ID: " + regId + " ***********");
+                            Log.d(TAG, "************ TWITTER ID: " + userId + " *********");
 
+
+                            //TODO: UNCOMMENT THIS CODE WHEN NOT RUNNING AT OFFICE
                             RestAdapter adapter = RestController.getInstance(context).getRestAdapter();
                             RegistrationEndpoint registrationEndpoint = adapter.create(RegistrationEndpoint.class);
                             registrationEndpoint.registerDevice(new RegistrationPayload(regId, uniqueDeviceId, String.valueOf(userId)), new Callback<Response>() {
@@ -87,6 +92,9 @@ public class GcmController {
                                     Log.e(TAG, "*** Retro Error: " + retrofitError.getMessage() + " ***");
                                 }
                             });
+
+                            //TODO: REMOVE THIS CODE WHEN NOT RUNNING AT THE OFFICE!
+                            //PreferenceController.getInstance(context).saveGcmRegistration(regId);
 
                             long delta = System.currentTimeMillis() - startTime;
                             if (BuildConfig.DEBUG) {
