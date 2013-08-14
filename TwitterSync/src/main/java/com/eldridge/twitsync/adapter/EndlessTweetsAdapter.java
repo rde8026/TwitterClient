@@ -61,7 +61,6 @@ public class EndlessTweetsAdapter extends EndlessAdapter {
     protected void appendCachedData() {
         ArrayAdapter<Status> tweets = (ArrayAdapter<Status>) getWrappedAdapter();
         if (items != null && !items.isEmpty()) {
-            items.remove(0);
             tweets.addAll(items);
         }
         ((ArrayAdapter<Status>)getWrappedAdapter()).notifyDataSetChanged();
