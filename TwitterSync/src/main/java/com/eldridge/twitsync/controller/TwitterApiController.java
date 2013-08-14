@@ -7,12 +7,19 @@ import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
+import com.eldridge.twitsync.rest.endpoints.StatusEndpoint;
+import com.eldridge.twitsync.rest.endpoints.payload.StatusUpdatePayload;
+import com.eldridge.twitsync.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import twitter4j.Paging;
 import twitter4j.ResponseList;
 import twitter4j.Status;
@@ -115,6 +122,7 @@ public class TwitterApiController {
                     Paging paging = new Paging();
                     paging.setCount(COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
+                    updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, false));
                     CacheController.getInstance(context).addToCache(tweets, false);
                 } catch (TwitterException te) {
@@ -133,6 +141,7 @@ public class TwitterApiController {
                     Paging paging = new Paging();
                     paging.setSinceId(statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
+                    updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
                     CacheController.getInstance(context).addToCache(tweets, true);
                 } catch (TwitterException te) {
@@ -155,6 +164,43 @@ public class TwitterApiController {
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
         return  (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
+    }
+
+    private void updateServerWithLatestMessage(final ResponseList<Status> tweets) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (tweets != null && !tweets.isEmpty()) {
+                        String deviceId = Utils.getUniqueDeviceId(context);
+                        Long twitterId = PreferenceController.getInstance(context).getUserId();
+                        Long messageId = tweets.get(0).getId();
+
+                        RestAdapter restAdapter = RestController.getInstance(context).getRestAdapter();
+                        StatusEndpoint statusEndpoint = restAdapter.create(StatusEndpoint.class);
+                        statusEndpoint.statusUpdate(new StatusUpdatePayload(String.valueOf(twitterId), String.valueOf(messageId), deviceId),
+                                new Callback<Response>() {
+                                    @Override
+                                    public void success(Response response, Response response2) {
+                                        if (BuildConfig.DEBUG) {
+                                            Log.d(TAG, "** Response Status: " + response.getStatus() + " **");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError retrofitError) {
+                                        Log.e(TAG, "** Status Update failed **", retrofitError.fillInStackTrace());
+                                    }
+                                });
+
+                    } else {
+                        Log.d(TAG, "** No Tweets returned - so no need to update **");
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "** Error updating server with latest message **", e);
+                }
+            }
+        });
     }
 
 }

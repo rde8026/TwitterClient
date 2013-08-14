@@ -88,13 +88,13 @@ public class GcmController {
                                 }
                             });
 
+                            long delta = System.currentTimeMillis() - startTime;
+                            if (BuildConfig.DEBUG) {
+                                Log.d(TAG, "***** Device Registration took " + delta + " ms ******");
+                            }
+
                         }
 
-
-                        long delta = System.currentTimeMillis() - startTime;
-                        if (BuildConfig.DEBUG) {
-                            Log.d(TAG, "***** Device Registration took " + delta + " ms ******");
-                        }
                     } else {
                         if (BuildConfig.DEBUG) {
                             Log.d(TAG, "****** UserId not set yet so we can NOT register the device at this point ******");
