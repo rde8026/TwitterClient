@@ -1,26 +1,34 @@
 package com.eldridge.twitsync.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.activity.MainActivity;
 import com.eldridge.twitsync.adapter.EndlessTweetsAdapter;
 import com.eldridge.twitsync.adapter.TweetsAdapter;
 import com.eldridge.twitsync.controller.BusController;
+import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.GcmController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.controller.TwitterApiController;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.ScrollMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
+import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
 import com.squareup.otto.Subscribe;
 
@@ -46,6 +54,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Long userId = PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).getUserId();
         if (userId == null || userId == -1) {
             TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserInfo();
@@ -62,7 +71,6 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         linearLoading = (LinearLayout) v.findViewById(R.id.linearLoading);
         pullToRefreshAttacher = ((MainActivity) getSherlockActivity()).getPullToRefreshAttacher();
         pullToRefreshAttacher.addRefreshableView(listView, this);
-
         showLoadingView();
         return v;
     }
@@ -84,6 +92,12 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         BusController.getInstance().unRegister(this);
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Status s = (Status)l.getItemAtPosition(position);
+        BusController.getInstance().postMessage(new TweetDetailMessage(s));
+    }
 
     @Subscribe
     public void userMessage(TwitterUserMessage twitterUserMessage) {
@@ -182,4 +196,22 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.moveToTop) {
+            BusController.getInstance().postMessage(new ScrollMessage(true));
+        } else if (item.getItemId() == R.id.moveToBottom) {
+            BusController.getInstance().postMessage(new ScrollMessage(false));
+        } else if (item.getItemId() == R.id.action_delete_db) {
+            CacheController.getInstance(getSherlockActivity()).clearDb();
+            PreferenceController.getInstance(getSherlockActivity()).clearGcmRegistration();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

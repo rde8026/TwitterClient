@@ -14,9 +14,11 @@ import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.fragment.LoadingFragment;
+import com.eldridge.twitsync.fragment.TweetDetailFragment;
 import com.eldridge.twitsync.fragment.TweetsFragment;
 import com.eldridge.twitsync.message.beans.AuthorizationCompleteMessage;
 import com.eldridge.twitsync.message.beans.ScrollMessage;
+import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.squareup.otto.Subscribe;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
@@ -81,22 +83,15 @@ public class MainActivity extends SherlockFragmentActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void addDetailFragment(TweetDetailMessage tweetDetailMessage) {
+        TweetDetailFragment detailFragment = TweetDetailFragment.newInstance(tweetDetailMessage.getStatus());
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragmentLayout, detailFragment);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.addToBackStack(TweetDetailFragment.NAME);
+        fragmentTransaction.commit();
     }
 
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        if (item.getItemId() == R.id.moveToTop) {
-            BusController.getInstance().postMessage(new ScrollMessage(true));
-        } else if (item.getItemId() == R.id.moveToBottom) {
-            BusController.getInstance().postMessage(new ScrollMessage(false));
-        } else if (item.getItemId() == R.id.action_delete_db) {
-            CacheController.getInstance(this).clearDb();
-            PreferenceController.getInstance(this).clearGcmRegistration();
-        }
-        return super.onMenuItemSelected(featureId, item);
-    }
 }
