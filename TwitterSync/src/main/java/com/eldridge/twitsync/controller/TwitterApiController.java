@@ -198,7 +198,9 @@ public class TwitterApiController {
             @Override
             public void run() {
                 try {
-                    if (tweets != null && !tweets.isEmpty()) {
+                    //TODO: Fix race condition where user/device registration is not complete but we attempt to store the last message
+                    //We should queue the request and replay it a configurable amount of times.
+                    if (tweets != null && !tweets.isEmpty() && PreferenceController.getInstance(context).getRegistrationId().length() > 0) {
                         String deviceId = Utils.getUniqueDeviceId(context);
                         Long twitterId = PreferenceController.getInstance(context).getUserId();
                         Long messageId = tweets.get(0).getId();
