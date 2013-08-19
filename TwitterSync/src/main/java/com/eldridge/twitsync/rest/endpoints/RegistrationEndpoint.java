@@ -12,7 +12,7 @@ import retrofit.http.POST;
  */
 public interface RegistrationEndpoint {
 
-    @POST("/register/device")
+    @POST("/api/register/device")
     void registerDevice(@Body RegistrationPayload registrationPayload, Callback<Response> cb);
 
 }

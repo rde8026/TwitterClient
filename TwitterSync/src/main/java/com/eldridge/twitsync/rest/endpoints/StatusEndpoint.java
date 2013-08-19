@@ -12,7 +12,7 @@ import retrofit.http.POST;
  */
 public interface StatusEndpoint {
 
-    @POST("/status/update")
+    @POST("/api/status/update")
     void statusUpdate(@Body StatusUpdatePayload statusUpdatePayload, Callback<Response> response);
 
 }

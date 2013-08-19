@@ -14,7 +14,7 @@ public class RestController {
     private static RestController instance;
     private Context context;
 
-    private static final String SERVER_URL = "http://10.0.1.6:3000";
+    private static final String SERVER_URL = "http://www.ryaneldridge.us";
     private static RestAdapter restAdapter;
 
     private RestController() {
