@@ -119,10 +119,10 @@ public class CacheController {
                         }
 
                         Tweet t = iterator.next();
-                        Status s = DataObjectFactory.createStatus(t.json);
-                        Log.d(TAG, "** Storing Tweet\n" + s.getText() + "\n **");
+                        //Status s = DataObjectFactory.createStatus(t.json);
+                        //Log.d(TAG, "** Storing Tweet\n" + s.getText() + "\n **");
                         if (t.getId() != null) {
-                            Log.d(TAG, "** Hack for ActiveAndroid **");
+                            //Log.d(TAG, "** Hack for ActiveAndroid **");
                             Tweet hackForUpdate = new Tweet();
                             hackForUpdate.timestamp = t.timestamp;
                             hackForUpdate.tweetId = t.tweetId;
