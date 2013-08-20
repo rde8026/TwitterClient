@@ -1,13 +1,10 @@
 package com.eldridge.twitsync.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -26,13 +23,11 @@ import com.eldridge.twitsync.controller.GcmController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.controller.TwitterApiController;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
-import com.eldridge.twitsync.message.beans.ScrollMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
 import com.squareup.otto.Subscribe;
 
-import twitter4j.ResponseList;
 import twitter4j.Status;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
@@ -158,12 +153,11 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         });
     }
 
-    @Subscribe
-    public void scrollMessage(final ScrollMessage scrollMessage) {
+    private void scrollMessages(final boolean top) {
         getSherlockActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (scrollMessage.isMoveToTop()) {
+                if (top) {
                     listView.smoothScrollToPosition(0);
                 } else {
                     listView.smoothScrollToPosition(listView.getCount() - 1);
@@ -205,9 +199,9 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.moveToTop) {
-            BusController.getInstance().postMessage(new ScrollMessage(true));
+            scrollMessages(true);
         } else if (item.getItemId() == R.id.moveToBottom) {
-            BusController.getInstance().postMessage(new ScrollMessage(false));
+            scrollMessages(false);
         } else if (item.getItemId() == R.id.action_delete_db) {
             CacheController.getInstance(getSherlockActivity()).clearDb();
             PreferenceController.getInstance(getSherlockActivity()).clearGcmRegistration();
