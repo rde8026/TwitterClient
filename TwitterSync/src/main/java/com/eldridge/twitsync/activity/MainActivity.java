@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
@@ -17,7 +14,6 @@ import com.eldridge.twitsync.fragment.LoadingFragment;
 import com.eldridge.twitsync.fragment.TweetDetailFragment;
 import com.eldridge.twitsync.fragment.TweetsFragment;
 import com.eldridge.twitsync.message.beans.AuthorizationCompleteMessage;
-import com.eldridge.twitsync.message.beans.ScrollMessage;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.squareup.otto.Subscribe;
 
