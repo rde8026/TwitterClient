@@ -80,14 +80,11 @@ public class TwitterRegisterController {
                 try {
                     oAuthProvider.retrieveAccessToken(httpOAuthConsumer, verifier);
 
-                    /*String token = httpOAuthConsumer.getToken();
-                    String tokenSecret = httpOAuthConsumer.getTokenSecret();*/
-
                     String accessToken = httpOAuthConsumer.getToken();
                     String secret = httpOAuthConsumer.getTokenSecret();
 
                     preferenceController.setAccessTokenAndSecret(accessToken, secret);
-
+                    TwitterApiController.getInstance(context).getUserInfo();
                     BusController.getInstance().postMessage(new AuthorizationCompleteMessage());
                 } catch (Exception e) {
                     Log.e(TAG, "Exception in retrieveAccessToken", e);

@@ -84,6 +84,7 @@ public class TweetDetailFragment extends SherlockFragment {
         if (item.getItemId() == android.R.id.home) {
             getSherlockActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSherlockActivity().getSupportFragmentManager().popBackStackImmediate(NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getSherlockActivity().getSupportActionBar().setTitle(R.string.app_name);
         }
         return super.onOptionsItemSelected(item);
     }

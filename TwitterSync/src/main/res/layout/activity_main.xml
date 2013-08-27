@@ -11,9 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"-->
 
-    <FrameLayout
-        android:id="@+id/fragmentLayout"
+    <fragment
+        android:name="com.eldridge.twitsync.fragment.TweetsFragment"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        tools:layout="@layout/tweets_fragment_layout"/>
 
 </RelativeLayout>

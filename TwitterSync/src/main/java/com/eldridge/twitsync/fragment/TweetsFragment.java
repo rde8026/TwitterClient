@@ -22,6 +22,7 @@ import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.GcmController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.controller.TwitterApiController;
+import com.eldridge.twitsync.message.beans.AuthorizationCompleteMessage;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
@@ -50,12 +51,11 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Long userId = PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).getUserId();
-        if (userId == null || userId == -1) {
-            TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserInfo();
-        } else {
+
+        if (PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).checkForExistingCredentials()) {
             TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserTimeLine();
         }
+
     }
 
     @Override
@@ -78,12 +78,14 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "**** TweetsFragment onResume called ****");
         BusController.getInstance().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "**** TweetsFragment onPause called ****");
         BusController.getInstance().unRegister(this);
     }
 
