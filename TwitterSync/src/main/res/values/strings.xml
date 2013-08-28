@@ -9,5 +9,6 @@
     <string name="move_to_bottom">Bottom</string>
     <string name="remove_cache">Remove Cache</string>
     <string name="tweet_details_ab_title">Tweet Details</string>
+    <string name="retweet_count_text">Re-Tweets: %s</string>
 
 </resources>

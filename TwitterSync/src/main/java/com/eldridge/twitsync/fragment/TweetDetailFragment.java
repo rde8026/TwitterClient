@@ -1,18 +1,26 @@
 package com.eldridge.twitsync.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
+import com.eldridge.twitsync.activity.TweetDetailActivity;
+import com.squareup.picasso.Picasso;
 
+import butterknife.InjectView;
+import butterknife.Views;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.URLEntity;
@@ -23,23 +31,14 @@ import twitter4j.URLEntity;
 public class TweetDetailFragment extends SherlockFragment {
 
     private static final String TAG = TweetDetailFragment.class.getSimpleName();
-    private static final String STATUS_KEY = "STATUS";
 
     private LinearLayout detailLoadingWrapper;
 
     public static final String NAME = "DETAILS_FRAGMENT";
 
-    public static TweetDetailFragment newInstance(Status status) {
-        TweetDetailFragment tweetDetailFragment = new TweetDetailFragment();
-        Bundle b = new Bundle();
-        b.putSerializable(STATUS_KEY, status);
-        tweetDetailFragment.setArguments(b);
-        return tweetDetailFragment;
-    }
-
-    private Status getStatus() {
-        return (Status)getArguments().getSerializable(STATUS_KEY);
-    }
+    @InjectView(R.id.profileImage) ImageView profileImage;
+    @InjectView(R.id.retweetCount) TextView retweetCount;
+    @InjectView(R.id.tweetText) TextView tweetText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,9 +49,14 @@ public class TweetDetailFragment extends SherlockFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tweet_detail_layout, container, false);
-        Status s = getStatus();
+        Views.inject(this, v);
         detailLoadingWrapper = (LinearLayout) v.findViewById(R.id.detailLoadingWrapper);
         return v;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
     }
 
     @Override
@@ -61,6 +65,17 @@ public class TweetDetailFragment extends SherlockFragment {
         toggleLoadingView();
         getSherlockActivity().getSupportActionBar().setTitle(R.string.tweet_details_ab_title);
         getSherlockActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TweetDetailActivity tweetDetailActivity = (TweetDetailActivity)getSherlockActivity();
+        Status status = tweetDetailActivity.getStatus();
+
+        Picasso.with(tweetDetailActivity.getApplicationContext()).load(R.drawable.ic_launcher).resize(125, 125).into(profileImage);
+        Picasso.with(tweetDetailActivity.getApplicationContext()).load(status.getUser().getBiggerProfileImageURLHttps()).resize(150, 150).into(profileImage);
+
+        retweetCount.setText(String.format(getResources().getString(R.string.retweet_count_text), String.valueOf(status.getRetweetCount())));
+        tweetText.setText(status.getText());
+
+        toggleLoadingView();
     }
 
     private void toggleLoadingView() {
@@ -82,9 +97,7 @@ public class TweetDetailFragment extends SherlockFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            getSherlockActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSherlockActivity().getSupportFragmentManager().popBackStackImmediate(NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            getSherlockActivity().getSupportActionBar().setTitle(R.string.app_name);
+            getSherlockActivity().finish();
         }
         return super.onOptionsItemSelected(item);
     }
