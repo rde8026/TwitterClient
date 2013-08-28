@@ -1,5 +1,6 @@
 package com.eldridge.twitsync.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,8 @@ import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
+import com.eldridge.twitsync.message.beans.TweetDetailMessage;
+import com.squareup.otto.Subscribe;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
@@ -53,15 +56,17 @@ public class MainActivity extends SherlockFragmentActivity {
         BusController.getInstance().unRegister(this);
     }
 
-    /*@SuppressWarnings("unused")
+    @SuppressWarnings("unused")
     @Subscribe
-    public void addDetailFragment(TweetDetailMessage tweetDetailMessage) {
-        TweetDetailFragment detailFragment = TweetDetailFragment.newInstance(tweetDetailMessage.getStatus());
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentLayout, detailFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.addToBackStack(TweetDetailFragment.NAME);
-        fragmentTransaction.commit();
-    }*/
+    public void addDetailFragment(final TweetDetailMessage tweetDetailMessage) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent detailIntent = new Intent(getApplicationContext(), TweetDetailActivity.class);
+                detailIntent.putExtra(TweetDetailActivity.DETAIL_KEY, tweetDetailMessage.getStatus());
+                startActivity(detailIntent);
+            }
+        });
+    }
 
 }
