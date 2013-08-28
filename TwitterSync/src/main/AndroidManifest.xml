@@ -49,6 +49,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.TweetDetailActivity"
+            android:label="T@string/tweet_details_ab_title">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+        </activity>
+
         <receiver android:name=".receiver.UpdateReceiver"
                   android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
