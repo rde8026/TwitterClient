@@ -22,10 +22,41 @@
 
     </LinearLayout>
 
-    <ListView
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@android:id/list"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:layout_above="@+id/tweetFooter"/>
+
+        <LinearLayout
+            android:id="@+id/tweetFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:id="@+id/tweetEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:hint="@string/tweet_edit_text_hint"/>
+
+            <Button
+                android:id="@+id/tweetAction"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:background="@android:drawable/ic_menu_send"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

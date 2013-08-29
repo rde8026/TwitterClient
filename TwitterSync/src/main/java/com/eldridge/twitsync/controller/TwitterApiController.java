@@ -6,6 +6,7 @@ import android.util.Log;
 import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
+import com.eldridge.twitsync.message.beans.TweetMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
 import com.eldridge.twitsync.rest.endpoints.StatusEndpoint;
 import com.eldridge.twitsync.rest.endpoints.payload.StatusUpdatePayload;
@@ -22,6 +23,7 @@ import retrofit.client.Response;
 import twitter4j.Paging;
 import twitter4j.ResponseList;
 import twitter4j.Status;
+import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -75,6 +77,22 @@ public class TwitterApiController {
             }
         }
         return instance;
+    }
+
+    public void sendTweet(final String text) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    StatusUpdate statusUpdate = new StatusUpdate(text);
+                    Status update = twitter.updateStatus(statusUpdate);
+                    BusController.getInstance().postMessage(new TweetMessage(true, update));
+                } catch (TwitterException te) {
+                    Log.e(TAG, "", te);
+                    BusController.getInstance().postMessage(new TweetMessage(false, te));
+                }
+            }
+        });
     }
 
     public void getUserInfo() {

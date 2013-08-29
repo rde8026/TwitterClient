@@ -2,6 +2,7 @@ package com.eldridge.twitsync.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.format.DateUtils;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -62,7 +64,7 @@ public class TweetDetailFragment extends SherlockFragment {
     @InjectView(R.id.mediaImage) ImageView mediaImage;
 
     private List<MediaUrlEntity> mediaUrlEntities = new ArrayList<MediaUrlEntity>();
-    private static SimpleDateFormat sdf = new SimpleDateFormat("MMM d - k:ma");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MMM d - k:mma");
 
     private String userName, userHandle;
 

@@ -14,5 +14,7 @@
     <string name="detail_retweet_username">\nretweeted by \@%s</string>
     <string name="detail_tweet_info" formatted="false">%s \@%s</string>
     <string name="detail_via_info">via - %s</string>
+    <string name="tweet_edit_text_hint">What\'s going on</string>
+    <string name="empty_tweet_toast_text">Nothing to tweet!</string>
 
 </resources>
