@@ -1,7 +1,10 @@
 package com.eldridge.twitsync.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +27,9 @@ import com.eldridge.twitsync.beans.MediaUrlEntity;
 import com.eldridge.twitsync.util.TypeEnum;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.InjectView;
@@ -44,7 +49,9 @@ public class TweetDetailFragment extends SherlockFragment {
 
     @InjectView(R.id.profileImage) ImageView profileImage;
     @InjectView(R.id.retweetCount) TextView retweetCount;
+    @InjectView(R.id.tweetInfo) TextView tweetInfo;
     @InjectView(R.id.tweetText) TextView tweetText;
+    @InjectView(R.id.tweetStatusText) TextView tweetStatusText;
 
     @InjectView(R.id.mediaLayout) LinearLayout mediaLayout;
     @InjectView(R.id.mediaWebView) WebView mediaWebView;
@@ -54,6 +61,9 @@ public class TweetDetailFragment extends SherlockFragment {
     @InjectView(R.id.mediaImage) ImageView mediaImage;
 
     private List<MediaUrlEntity> mediaUrlEntities = new ArrayList<MediaUrlEntity>();
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MMM d - k:ma");
+
+    private String userName, userHandle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,54 +84,73 @@ public class TweetDetailFragment extends SherlockFragment {
         super.onAttach(activity);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //toggle view to show loading view (won't be there long)
         toggleLoadingView();
         getSherlockActivity().getSupportActionBar().setTitle(R.string.tweet_details_ab_title);
         getSherlockActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        //Setup webview
         mediaWebView.getSettings().setJavaScriptEnabled(true);
         mediaWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         mediaWebView.setWebViewClient(new DetailWebViewClient());
         mediaWebView.setWebChromeClient(new DetailWebChromeClient());
-
+        //Access parent activity and get status object from parent activity
         TweetDetailActivity tweetDetailActivity = (TweetDetailActivity)getSherlockActivity();
         Status status = tweetDetailActivity.getStatus();
-
+        //Load launcher icon as placeholder
         Picasso.with(tweetDetailActivity.getApplicationContext()).load(R.drawable.ic_launcher).resize(100, 100).into(profileImage);
-        Picasso.with(tweetDetailActivity.getApplicationContext())
-                .load(status.getUser().getBiggerProfileImageURLHttps())
-                .resize(100, 100)
-                .into(profileImage);
-
+        //Set retweet count
         retweetCount.setText(String.format(getResources().getString(R.string.retweet_count_text), String.valueOf(status.getRetweetCount())));
+        //Setup string buffer for tweet status info
+        StringBuffer sb = new StringBuffer();
+        sb.append(formatDate(status.getCreatedAt()));
+        sb.append(" ");
+        sb.append(String.format(getSherlockActivity().getResources().getString(R.string.detail_via_info), Html.fromHtml(status.getSource())));
 
+        //Check if tweet was retweeted and load proper info based on that info
+        if (status.isRetweet()) {
+            userName = status.getRetweetedStatus().getUser().getName();
+            userHandle = status.getRetweetedStatus().getUser().getScreenName();
+
+            Picasso.with(tweetDetailActivity.getApplicationContext())
+                    .load(status.getRetweetedStatus().getUser().getBiggerProfileImageURLHttps())
+                    .resize(125, 125)
+                    .into(profileImage);
+            sb.append(" ");
+            sb.append(String.format(getSherlockActivity().getResources().getString(R.string.detail_retweet_username), status.getUser().getScreenName()));
+        } else {
+            userName = status.getUser().getName();
+            userHandle = status.getUser().getScreenName();
+
+            Picasso.with(tweetDetailActivity.getApplicationContext())
+                    .load(status.getUser().getBiggerProfileImageURLHttps())
+                    .resize(125, 125)
+                    .into(profileImage);
+        }
+        //Load text for tweet info
+        tweetInfo.setText(String.format(getSherlockActivity().getString(R.string.detail_tweet_info), userName, userHandle));
+        //Load tweetStatus info
+        tweetStatusText.setText(sb.toString());
+
+        //Load tweet text
         tweetText.setText(status.getText());
 
+        //Add all known media url's to the list of URL's
         if ( status.getMediaEntities() != null && status.getMediaEntities().length > 0 ) {
             MediaEntity[] mediaEntities = status.getMediaEntities();
             for (MediaEntity entity : mediaEntities) {
                 mediaUrlEntities.add(new MediaUrlEntity(entity, TypeEnum.parse(entity.getType()) == TypeEnum.PHOTO));
             }
-            MediaEntity entryOne = mediaEntities[0];
-
-            Log.d(TAG, "*** Media Entity Type: " + entryOne.getType() + " ***");
-            Log.d(TAG, "*** Media Entity Media URL: " + entryOne.getMediaURL() + " ***");
-            Log.d(TAG, "*** Media Entity Display URL: " + entryOne.getDisplayURL() + " ***");
-            Log.d(TAG, "*** Media Entity URL: " + entryOne.getURL() + " ***");
-
         }
-
+        //Add all known url's to the list of URL's
         if ( status.getURLEntities() != null && status.getURLEntities().length > 0 ) {
             URLEntity[] urlEntities = status.getURLEntities();
             for (URLEntity entity : urlEntities) {
                 mediaUrlEntities.add(new MediaUrlEntity(entity, false));
             }
-            URLEntity entryOne = urlEntities[0];
-            Log.d(TAG, "*** Entity Display URL: " + entryOne.getDisplayURL() + " ***");
-            Log.d(TAG, "*** Entity URL: " + entryOne.getURL() + " ***");
-            Log.d(TAG, "*** Entity Expanded URL: " + entryOne.getExpandedURL() + " ****");
         }
 
         if ( !mediaUrlEntities.isEmpty() ) {
@@ -148,8 +177,8 @@ public class TweetDetailFragment extends SherlockFragment {
                 Log.d(TAG, "*** Unknown Entity ***");
             }
         }
-        Log.d(TAG, "*** MediaUrlEntities size: " + mediaUrlEntities.size() + " ***");
 
+        //Toggle Loading Progress
         toggleLoadingView();
     }
 
@@ -200,4 +229,9 @@ public class TweetDetailFragment extends SherlockFragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private String formatDate(Date d) {
+        return sdf.format(d);
+    }
+
 }

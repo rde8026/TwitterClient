@@ -10,5 +10,9 @@
     <string name="remove_cache">Remove Cache</string>
     <string name="tweet_details_ab_title">Tweet Details</string>
     <string name="retweet_count_text">Re-Tweets: %s</string>
+    <string name="profile_image_content_description">profileImage</string>
+    <string name="detail_retweet_username">\nretweeted by \@%s</string>
+    <string name="detail_tweet_info" formatted="false">%s \@%s</string>
+    <string name="detail_via_info">via - %s</string>
 
 </resources>
