@@ -19,7 +19,8 @@
             android:descendantFocusability="blocksDescendants"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:paddingBottom="1dp">
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp">
 
         <LinearLayout
             android:id="@+id/userInfoLayout"
