@@ -121,9 +121,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
 
                 if (timelineUpdateMessage.isRefresh()) {
                     if (timelineUpdateMessage.getTweets() != null && timelineUpdateMessage.getTweets().size() > 0 && timelineUpdateMessage.isPrepend()) {
-
-                        for (int i = timelineUpdateMessage.getTweets().size() - 1; i >= 0; i--) {
-                            Status s = timelineUpdateMessage.getTweets().get(i);
+                        for (Status s : timelineUpdateMessage.getTweets()) {
                             adapter.insert(s, 0);
                         }
 
