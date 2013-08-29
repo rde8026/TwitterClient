@@ -12,6 +12,7 @@ import com.eldridge.twitsync.db.Tweet;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -56,19 +57,14 @@ public class CacheController {
 
     public synchronized void addToCache(final ResponseList<Status> items, boolean front) {
         try {
-            deque.size();
             long startTime = System.currentTimeMillis();
             //If we are adding Tweets to the front of the cache they need to be in the
             //reverse order of how they will be presented in the list so our cache is properly ordered
             if (front) {
-                for (int i = items.size() - 1; i >= 0; i--) {
-                    Status s = items.get(i);
-                    addTweetToMemoryCache(createTweetObject(s), front);
-                }
-            } else {
-                for (Status s : items) {
-                    addTweetToMemoryCache(createTweetObject(s), front);
-                }
+                Collections.reverse(items);
+            }
+            for (Status s : items) {
+                addTweetToMemoryCache(createTweetObject(s), front);
             }
             if (BuildConfig.DEBUG) {
                 long delta = System.currentTimeMillis() - startTime;
