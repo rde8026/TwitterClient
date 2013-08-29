@@ -24,6 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.activity.TweetDetailActivity;
 import com.eldridge.twitsync.beans.MediaUrlEntity;
+import com.eldridge.twitsync.util.LinkifyWithTwitter;
 import com.eldridge.twitsync.util.TypeEnum;
 import com.squareup.picasso.Picasso;
 
@@ -137,6 +138,7 @@ public class TweetDetailFragment extends SherlockFragment {
 
         //Load tweet text
         tweetText.setText(status.getText());
+        LinkifyWithTwitter.addLinks(tweetText, LinkifyWithTwitter.ALL);
 
         //Add all known media url's to the list of URL's
         if ( status.getMediaEntities() != null && status.getMediaEntities().length > 0 ) {

@@ -15,10 +15,10 @@
         android:visibility="gone">
 
         <ProgressBar
-                android:id="@+id/loadingProgress"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"/>
+            android:id="@+id/loadingProgress"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
