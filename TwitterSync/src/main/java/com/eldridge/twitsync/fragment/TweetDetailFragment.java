@@ -20,8 +20,12 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.activity.TweetDetailActivity;
+import com.eldridge.twitsync.beans.MediaUrlEntity;
 import com.eldridge.twitsync.util.TypeEnum;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.Views;
@@ -38,8 +42,6 @@ public class TweetDetailFragment extends SherlockFragment {
 
     private LinearLayout detailLoadingWrapper;
 
-    public static final String NAME = "DETAILS_FRAGMENT";
-
     @InjectView(R.id.profileImage) ImageView profileImage;
     @InjectView(R.id.retweetCount) TextView retweetCount;
     @InjectView(R.id.tweetText) TextView tweetText;
@@ -50,6 +52,8 @@ public class TweetDetailFragment extends SherlockFragment {
 
     @InjectView(R.id.imageLayout) LinearLayout imageLayout;
     @InjectView(R.id.mediaImage) ImageView mediaImage;
+
+    private List<MediaUrlEntity> mediaUrlEntities = new ArrayList<MediaUrlEntity>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,14 +89,21 @@ public class TweetDetailFragment extends SherlockFragment {
         TweetDetailActivity tweetDetailActivity = (TweetDetailActivity)getSherlockActivity();
         Status status = tweetDetailActivity.getStatus();
 
-        Picasso.with(tweetDetailActivity.getApplicationContext()).load(R.drawable.ic_launcher).resize(175, 175).into(profileImage);
-        Picasso.with(tweetDetailActivity.getApplicationContext()).load(status.getUser().getBiggerProfileImageURLHttps()).resize(175, 175).into(profileImage);
+        Picasso.with(tweetDetailActivity.getApplicationContext()).load(R.drawable.ic_launcher).resize(100, 100).into(profileImage);
+        Picasso.with(tweetDetailActivity.getApplicationContext())
+                .load(status.getUser().getBiggerProfileImageURLHttps())
+                .resize(100, 100)
+                .into(profileImage);
 
         retweetCount.setText(String.format(getResources().getString(R.string.retweet_count_text), String.valueOf(status.getRetweetCount())));
+
         tweetText.setText(status.getText());
 
         if ( status.getMediaEntities() != null && status.getMediaEntities().length > 0 ) {
             MediaEntity[] mediaEntities = status.getMediaEntities();
+            for (MediaEntity entity : mediaEntities) {
+                mediaUrlEntities.add(new MediaUrlEntity(entity, TypeEnum.parse(entity.getType()) == TypeEnum.PHOTO));
+            }
             MediaEntity entryOne = mediaEntities[0];
 
             Log.d(TAG, "*** Media Entity Type: " + entryOne.getType() + " ***");
@@ -100,25 +111,44 @@ public class TweetDetailFragment extends SherlockFragment {
             Log.d(TAG, "*** Media Entity Display URL: " + entryOne.getDisplayURL() + " ***");
             Log.d(TAG, "*** Media Entity URL: " + entryOne.getURL() + " ***");
 
-            if (TypeEnum.parse(entryOne.getType()) == TypeEnum.PHOTO) {
-                imageLayout.setVisibility(View.VISIBLE);
-                Picasso.with(getSherlockActivity().getApplicationContext()).load(entryOne.getMediaURL()).into(mediaImage);
-            } else {
-                mediaLayout.setVisibility(View.VISIBLE);
-                mediaWebView.loadUrl(entryOne.getMediaURL());
-            }
+        }
 
-
-        } else if ( status.getURLEntities() != null && status.getURLEntities().length > 0 ) {
-            mediaLayout.setVisibility(View.VISIBLE);
+        if ( status.getURLEntities() != null && status.getURLEntities().length > 0 ) {
             URLEntity[] urlEntities = status.getURLEntities();
+            for (URLEntity entity : urlEntities) {
+                mediaUrlEntities.add(new MediaUrlEntity(entity, false));
+            }
             URLEntity entryOne = urlEntities[0];
             Log.d(TAG, "*** Entity Display URL: " + entryOne.getDisplayURL() + " ***");
             Log.d(TAG, "*** Entity URL: " + entryOne.getURL() + " ***");
             Log.d(TAG, "*** Entity Expanded URL: " + entryOne.getExpandedURL() + " ****");
-
-            mediaWebView.loadUrl(entryOne.getURL());
         }
+
+        if ( !mediaUrlEntities.isEmpty() ) {
+            MediaUrlEntity entity = mediaUrlEntities.get(0);
+            if ( entity.getUrlEntity() instanceof MediaEntity ) {
+                MediaEntity mediaEntity = (MediaEntity) entity.getUrlEntity();
+                if ( entity.isPhoto() ) {
+                    imageLayout.setVisibility(View.VISIBLE);
+
+                    Picasso.with(getSherlockActivity().getApplicationContext())
+                            .load(mediaEntity.getMediaURL())
+                            .placeholder(R.drawable.ic_launcher)
+                            .error(R.drawable.ic_launcher)
+                            .into(mediaImage);
+                } else {
+                    mediaLayout.setVisibility(View.VISIBLE);
+                    mediaWebView.loadUrl(mediaEntity.getMediaURL());
+                }
+            } else if ( entity.getUrlEntity() instanceof URLEntity ) {
+                URLEntity urlEntity = (URLEntity) entity.getUrlEntity();
+                mediaLayout.setVisibility(View.VISIBLE);
+                mediaWebView.loadUrl(urlEntity.getURL());
+            } else {
+                Log.d(TAG, "*** Unknown Entity ***");
+            }
+        }
+        Log.d(TAG, "*** MediaUrlEntities size: " + mediaUrlEntities.size() + " ***");
 
         toggleLoadingView();
     }
