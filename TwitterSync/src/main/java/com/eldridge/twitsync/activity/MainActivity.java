@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.crashlytics.android.Crashlytics;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
@@ -25,6 +26,8 @@ public class MainActivity extends SherlockFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
+
         pullToRefreshAttacher = PullToRefreshAttacher.get(this);
         preferenceController = PreferenceController.getInstance(getApplicationContext());
 

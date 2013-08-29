@@ -67,6 +67,7 @@
 
         <meta-data android:name="AA_DB_NAME" android:value="twitsync.db" />
         <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="844966e8d736340706b374cdef45d079eabd79f7"/>
 
     </application>
 
