@@ -4,7 +4,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:descendantFocusability="blocksDescendants"
-        android:layout_height="?android:attr/listPreferredItemHeight">
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp">
 
     <ImageView
         android:id="@+id/profileImage"
@@ -18,9 +20,7 @@
             android:layout_toRightOf="@+id/profileImage"
             android:descendantFocusability="blocksDescendants"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp">
+            android:paddingRight="3dp">
 
         <LinearLayout
             android:id="@+id/userInfoLayout"
