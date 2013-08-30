@@ -58,6 +58,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     private PullToRefreshAttacher pullToRefreshAttacher;
 
     private InputMethodManager imm;
+    private Menu menu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,8 +145,6 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
 
                         endlessTweetsAdapter.notifyDataSetChanged();
                         listView.smoothScrollToPosition(0);
-                    } else {
-                        //Toast.makeText(getSherlockActivity(), "No new Tweets to show!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 pullToRefreshAttacher.setRefreshComplete();
@@ -211,6 +210,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main, menu);
+        this.menu = menu;
     }
 
     @Override
@@ -231,7 +231,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         public void onClick(View view) {
             String tweetText = tweetEdit.getText().toString();
             if (tweetText.length() > 0) {
-                getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+                toggleRefreshMenuItem();
                 TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).sendTweet(tweetText);
             } else {
                 Toast.makeText(getSherlockActivity(), getSherlockActivity().getResources().getString(R.string.empty_tweet_toast_text), Toast.LENGTH_SHORT).show();
@@ -253,9 +253,18 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
                 } else {
                     Toast.makeText(getSherlockActivity(), tweetMessage.getTwitterException().getErrorMessage(), Toast.LENGTH_SHORT).show();
                 }
-                getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+                toggleRefreshMenuItem();
             }
         });
+    }
+
+    private void toggleRefreshMenuItem() {
+        MenuItem progressItem = this.menu.findItem(R.id.menuProgress);
+        if (progressItem.isVisible()) {
+            progressItem.setVisible(false);
+        } else {
+            progressItem.setVisible(true);
+        }
     }
 
 }
