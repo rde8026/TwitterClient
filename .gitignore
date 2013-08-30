@@ -1,0 +1,12 @@
+### File / Folder that I don't want to deal w/ anymore! ###
+
+*.iml
+
+.gradle/1.6/taskArtifacts/*.bin
+
+.idea/
+TwitterSync/build/
+
+libraries/actionbarsherlock/build
+libraries/google-play-services_lib/build
+libraries/pulltorefresh/build
