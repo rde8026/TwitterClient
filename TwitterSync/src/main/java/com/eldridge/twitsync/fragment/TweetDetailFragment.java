@@ -184,7 +184,7 @@ public class TweetDetailFragment extends SherlockFragment {
                 Log.d(TAG, "*** Unknown Entity ***");
             }
         }
-        TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getRelatedResults(status.getId());
+        //TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getRelatedResults(status.getId());
         //Toggle Loading Progress
         toggleLoadingView();
     }
