@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.message.beans.ConversationMessage;
+import com.eldridge.twitsync.message.beans.DirectMessagesMessage;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
+import com.eldridge.twitsync.message.beans.MentionsMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TweetMessage;
 import com.eldridge.twitsync.message.beans.TwitterUserMessage;
@@ -21,6 +23,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import twitter4j.DirectMessage;
 import twitter4j.Paging;
 import twitter4j.RelatedResults;
 import twitter4j.ResponseList;
@@ -220,6 +223,36 @@ public class TwitterApiController {
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ConversationMessage(false, te));
+                }
+            }
+        });
+    }
+
+    public void getDirectMessages() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<DirectMessage> messages = twitter.getDirectMessages();
+                    BusController.getInstance().postMessage(new DirectMessagesMessage(true, messages));
+                } catch (TwitterException te) {
+                    Log.e(TAG, "", te);
+                    BusController.getInstance().postMessage(new DirectMessagesMessage(false, te));
+                }
+            }
+        });
+    }
+
+    public void getMentions() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Status> mentions = twitter.getMentionsTimeline();
+                    BusController.getInstance().postMessage(new MentionsMessage(true, mentions));
+                } catch (TwitterException te) {
+                    Log.e(TAG, "", te);
+                    BusController.getInstance().postMessage(new MentionsMessage(false, te));
                 }
             }
         });

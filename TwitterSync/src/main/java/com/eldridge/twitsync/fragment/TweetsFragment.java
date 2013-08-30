@@ -65,11 +65,11 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        if (PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).checkForExistingCredentials()) {
+        /*if (PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).checkForExistingCredentials()) {
             TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserTimeLine();
         }
 
-        imm = (InputMethodManager)getSherlockActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager)getSherlockActivity().getSystemService(Context.INPUT_METHOD_SERVICE);*/
     }
 
     @Override
@@ -84,8 +84,19 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         linearLoading = (LinearLayout) v.findViewById(R.id.linearLoading);
         pullToRefreshAttacher = ((MainActivity) getSherlockActivity()).getPullToRefreshAttacher();
         pullToRefreshAttacher.addRefreshableView(listView, this);
-        showLoadingView();
+        //showLoadingView();
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).checkForExistingCredentials()) {
+            TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserTimeLine();
+        }
+
+        imm = (InputMethodManager)getSherlockActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        showLoadingView();
     }
 
     @Override

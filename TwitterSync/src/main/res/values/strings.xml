@@ -17,5 +17,8 @@
     <string name="tweet_edit_text_hint">What\'s going on</string>
     <string name="empty_tweet_toast_text">Nothing to tweet!</string>
     <string name="menu_refresh_title">Refresh</string>
+    <string name="timeline_tab_text">Timeline</string>
+    <string name="direct_message_tab_text">Direct Messages</string>
+    <string name="mentions_tab_text">Mentions</string>
 
 </resources>

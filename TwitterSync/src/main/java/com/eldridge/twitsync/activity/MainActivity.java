@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
 import com.crashlytics.android.Crashlytics;
 import com.eldridge.twitsync.R;
+import com.eldridge.twitsync.adapter.ViewPagerAdapter;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
@@ -24,6 +27,10 @@ public class MainActivity extends SherlockFragmentActivity {
     private PreferenceController preferenceController;
     private PullToRefreshAttacher pullToRefreshAttacher;
 
+    private ViewPager mViewPager;
+    private ActionBar mActionBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +40,54 @@ public class MainActivity extends SherlockFragmentActivity {
         pullToRefreshAttacher = PullToRefreshAttacher.get(this);
         preferenceController = PreferenceController.getInstance(getApplicationContext());
 
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_viewpager_tabs_layout);
+        mActionBar = getSupportActionBar();
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        ViewPager.SimpleOnPageChangeListener viewPagerListener = new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mActionBar.setSelectedNavigationItem(position);
+            }
+        };
+
+        mViewPager.setOnPageChangeListener(viewPagerListener);
 
         fragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
+        mViewPager.setAdapter(viewPagerAdapter);
+
+        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+        };
+
+        ActionBar.Tab timeLineTab = mActionBar.newTab().setText(getString(R.string.timeline_tab_text)).setTabListener(tabListener);
+        mActionBar.addTab(timeLineTab);
+
+        ActionBar.Tab mentionsTab = mActionBar.newTab().setText(getString(R.string.mentions_tab_text)).setTabListener(tabListener);
+        mActionBar.addTab(mentionsTab);
+
+        ActionBar.Tab directMessageTab = mActionBar.newTab().setText(getString(R.string.direct_message_tab_text)).setTabListener(tabListener);
+        mActionBar.addTab(directMessageTab);
+
+
 
         if (!preferenceController.checkForExistingCredentials()) {
             Intent authIntent = new Intent(MainActivity.this, AuthActivity.class);
