@@ -63,7 +63,7 @@ public class TweetsAdapter extends ArrayAdapter<Status> {
             viewHolder.authorTwitterHandle.setText("@" + status.getRetweetedStatus().getUser().getScreenName());
             LinkifyWithTwitter.addLinks(viewHolder.authorTwitterHandle, LinkifyWithTwitter.AT_MENTIONS);
 
-            viewHolder.retweetAuthor.setText("Retweeted by @" + status.getUser().getScreenName());
+            viewHolder.retweetAuthor.setText("retweeted by @" + status.getUser().getScreenName());
             LinkifyWithTwitter.addLinks(viewHolder.retweetAuthor, LinkifyWithTwitter.AT_MENTIONS);
         } else {
             Picasso.with(context).load(status.getUser().getBiggerProfileImageURLHttps()).resize(125, 125).into(viewHolder.profileImage);

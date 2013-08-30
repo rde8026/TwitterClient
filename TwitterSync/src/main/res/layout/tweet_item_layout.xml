@@ -62,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColorLink="#449def"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@android:style/TextAppearance.Holo"
+            android:textSize="@dimen/super_small_text"
             android:linksClickable="false"
             android:layout_below="@+id/tweetText"/>
 
