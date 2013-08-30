@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.eldridge.twitsync.BuildConfig;
+import com.eldridge.twitsync.message.beans.ConversationMessage;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TweetMessage;
@@ -21,6 +22,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import twitter4j.Paging;
+import twitter4j.RelatedResults;
 import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
@@ -205,6 +207,22 @@ public class TwitterApiController {
             Log.e(TAG, "Error updating Tweets from Gcm");
             Log.e(TAG, "", e);
         }
+    }
+
+    public void getRelatedResults(final long tweetId) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    RelatedResults relatedResults = twitter.getRelatedResults(tweetId);
+                    ResponseList<Status> conversation = relatedResults.getTweetsWithConversation();
+                    BusController.getInstance().postMessage(new ConversationMessage(true, conversation));
+                } catch (TwitterException te) {
+                    Log.e(TAG, "", te);
+                    BusController.getInstance().postMessage(new ConversationMessage(false, te));
+                }
+            }
+        });
     }
 
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {

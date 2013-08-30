@@ -26,8 +26,11 @@ import com.actionbarsherlock.view.MenuItem;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.activity.TweetDetailActivity;
 import com.eldridge.twitsync.beans.MediaUrlEntity;
+import com.eldridge.twitsync.controller.TwitterApiController;
+import com.eldridge.twitsync.message.beans.ConversationMessage;
 import com.eldridge.twitsync.util.LinkifyWithTwitter;
 import com.eldridge.twitsync.util.TypeEnum;
+import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -181,7 +184,7 @@ public class TweetDetailFragment extends SherlockFragment {
                 Log.d(TAG, "*** Unknown Entity ***");
             }
         }
-
+        TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getRelatedResults(status.getId());
         //Toggle Loading Progress
         toggleLoadingView();
     }
@@ -236,6 +239,14 @@ public class TweetDetailFragment extends SherlockFragment {
 
     private String formatDate(Date d) {
         return sdf.format(d);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void getConversation(ConversationMessage conversationMessage) {
+        if (conversationMessage.isSuccess()) {
+            Log.d(TAG, "");
+        }
     }
 
 }
