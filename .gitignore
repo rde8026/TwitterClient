@@ -1,6 +1,9 @@
 ### File / Folder that I don't want to deal w/ anymore! ###
 
 *.iml
+libraries/actionbarsherlock/actionbarsherlock.iml
+libraries/google-play-services_lib/google-play-services_lib.iml
+libraries/pulltorefresh/pulltorefresh.iml
 
 .gradle/1.6/taskArtifacts/*.bin
 
