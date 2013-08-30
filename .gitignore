@@ -1,15 +1,15 @@
 ### File / Folder that I don't want to deal w/ anymore! ###
 
-*.iml
-libraries/actionbarsherlock/actionbarsherlock.iml
-libraries/google-play-services_lib/google-play-services_lib.iml
-libraries/pulltorefresh/pulltorefresh.iml
+#*.iml
+#libraries/actionbarsherlock/actionbarsherlock.iml
+#libraries/google-play-services_lib/google-play-services_lib.iml
+#libraries/pulltorefresh/pulltorefresh.iml
 
-.gradle/1.6/taskArtifacts/*.bin
+#.gradle/1.6/taskArtifacts/*.bin
 
-.idea/
-TwitterSync/build/
+#.idea/
+#TwitterSync/build/
 
-libraries/actionbarsherlock/build
-libraries/google-play-services_lib/build
-libraries/pulltorefresh/build
+#libraries/actionbarsherlock/build
+#libraries/google-play-services_lib/build
+#libraries/pulltorefresh/build
