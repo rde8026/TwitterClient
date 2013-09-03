@@ -32,7 +32,7 @@ public class CacheController {
     private static CacheController instance;
     private Context context;
 
-    private static final int CACHE_SIZE = 300;
+    private static final int CACHE_SIZE = 500;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
