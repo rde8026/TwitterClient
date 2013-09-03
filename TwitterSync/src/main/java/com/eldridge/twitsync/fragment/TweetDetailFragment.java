@@ -169,8 +169,8 @@ public class TweetDetailFragment extends SherlockFragment {
 
                     Picasso.with(getSherlockActivity().getApplicationContext())
                             .load(mediaEntity.getMediaURL())
-                            .placeholder(R.drawable.ic_launcher)
-                            .error(R.drawable.ic_launcher)
+                            /*.placeholder(R.drawable.ic_launcher)
+                            .error(R.drawable.ic_launcher)*/
                             .into(mediaImage);
                 } else {
                     mediaLayout.setVisibility(View.VISIBLE);
