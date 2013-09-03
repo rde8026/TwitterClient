@@ -15,6 +15,7 @@ import com.eldridge.twitsync.rest.endpoints.StatusEndpoint;
 import com.eldridge.twitsync.rest.endpoints.payload.StatusUpdatePayload;
 import com.eldridge.twitsync.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -51,7 +52,9 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 50;
+    private static final int COUNT = 200;
+    private static final int HISTORY_COUNT = 50;
+    private static final int MAX_PAGE_NUMBER = 4;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -135,17 +138,43 @@ public class TwitterApiController {
         });
     }
 
-    public void getUserTimeLineFromTwitter() {
+    public synchronized void getUserTimeLineFromTwitter() {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                boolean keepFetching = true;
+                int pageNumber = 1;
+                Paging paging = null;
                 try {
-                    Paging paging = new Paging();
-                    paging.setCount(COUNT);
+                    paging = new Paging(pageNumber, COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
+                    if (tweets.isEmpty()) {
+                        keepFetching = false;
+                        Log.d(TAG, "*** No tweets returned ***");
+                    }
+                    CacheController.getInstance(context).addToCache(tweets, false);
+                    Log.d(TAG, "**** Fetching PageNumber: " + pageNumber + " ****");
+                    while (keepFetching) {
+                        if (pageNumber < MAX_PAGE_NUMBER ) {
+                            pageNumber++;
+                            Log.d(TAG, "**** Fetching PageNumber: " + pageNumber + " ****");
+                            paging = new Paging(pageNumber, COUNT);
+                            //Have to do this hack to update the in mem cache in real time because of limitation of Twitter4J not
+                            //being able to get access to the raw json after things are added to the original tweets list
+                            ResponseList<Status> moreTweets = getPagedTweets(paging);
+                            if (moreTweets.isEmpty()) {
+                                keepFetching = false;
+                                Log.d(TAG, "*** No [MORE] tweets returned ***");
+                            }
+                            tweets.addAll(moreTweets);
+                            CacheController.getInstance(context).addToCache(moreTweets, false);
+                        } else {
+                            keepFetching = false;
+                        }
+                    }
+
                     updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true));
-                    CacheController.getInstance(context).addToCache(tweets, false);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -158,13 +187,31 @@ public class TwitterApiController {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                boolean keepFetching = true;
+                int pageNumber = 1;
+                Paging paging = null;
                 try {
-                    Paging paging = new Paging();
-                    paging.setSinceId(statusId);
+                    paging = new Paging(pageNumber, COUNT, statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
+                    if (tweets.isEmpty()) {
+                        keepFetching = false;
+                    }
+                    CacheController.getInstance(context).addToCache(tweets, true);
+                    Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
+                    while (keepFetching) {
+                        pageNumber++;
+                        Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
+                        paging = new Paging(pageNumber, COUNT, statusId);
+                        ResponseList<Status> moreTweets = getPagedTweets(paging);
+                        if (moreTweets.isEmpty()) {
+                            keepFetching = false;
+                            Log.d(TAG, "*** [Refresh] No [MORE] tweets returned ***");
+                        }
+                        tweets.addAll(moreTweets);
+                        CacheController.getInstance(context).addToCache(moreTweets, true);
+                    }
                     updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
-                    CacheController.getInstance(context).addToCache(tweets, true);
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
@@ -177,7 +224,7 @@ public class TwitterApiController {
     public ResponseList<Status> syncGetUserTimeLineHistory(final Long statusId) throws TwitterException {
         Paging paging = new Paging();
         paging.setMaxId(statusId);
-        paging.setCount(COUNT);
+        paging.setCount(HISTORY_COUNT);
         ResponseList<Status> tweets = getPagedTweets(paging);
         if (tweets != null && !tweets.isEmpty()) {
             tweets.remove(0);
@@ -187,10 +234,45 @@ public class TwitterApiController {
     }
 
     public void syncFromGcm(Long messageId) {
+        Paging paging;
+        boolean keepFetching = true;
+        int pageNumber = 1;
+        long sinceId = -1;
+        boolean hasCache;
         try {
             List<Status> cachedTweets = CacheController.getInstance(context).getLatestCachedTweets();
-            Paging paging = new Paging();
-            if (cachedTweets != null && !cachedTweets.isEmpty()) {
+            hasCache = cachedTweets != null && !cachedTweets.isEmpty();
+            if (hasCache) {
+                sinceId = cachedTweets.get(0).getId();
+            }
+            paging = new Paging(pageNumber, COUNT, sinceId, messageId);
+            ResponseList<Status> tweets = getPagedTweets(paging);
+            if (tweets.isEmpty()) {
+                keepFetching = false;
+            }
+            if (hasCache) {
+                CacheController.getInstance(context).addToCache(tweets, true);
+            } else {
+                CacheController.getInstance(context).addToCache(tweets, false);
+            }
+            Log.d(TAG, "**** Sync tweets from Server - PageNumber: " + pageNumber + " ****");
+            while (keepFetching) {
+                pageNumber++;
+                Log.d(TAG, "**** Sync tweets from Server - PageNumber: " + pageNumber + " *****");
+                paging = new Paging(pageNumber, COUNT, sinceId, messageId);
+                ResponseList<Status> moreTweets = getPagedTweets(paging);
+                if (moreTweets.isEmpty()) {
+                    keepFetching = false;
+                    Log.d(TAG, "**** Sync tweets No [More] Tweets returned ****");
+                }
+                tweets.addAll(moreTweets);
+                if (hasCache) {
+                    CacheController.getInstance(context).addToCache(moreTweets, true);
+                } else {
+                    CacheController.getInstance(context).addToCache(moreTweets, false);
+                }
+            }
+            /*if (cachedTweets != null && !cachedTweets.isEmpty()) {
                 Status s = cachedTweets.get(0);
                 paging.setSinceId(s.getId());
                 paging.setMaxId(messageId);
@@ -203,7 +285,7 @@ public class TwitterApiController {
                 paging.setCount(COUNT);
                 ResponseList<Status> tweets = getPagedTweets(paging);
                 CacheController.getInstance(context).addToCache(tweets, false);
-            }
+            }*/
 
             CacheController.getInstance(context).trimCache();
         } catch (Exception e) {
