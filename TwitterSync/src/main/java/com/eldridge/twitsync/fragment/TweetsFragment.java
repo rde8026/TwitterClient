@@ -180,17 +180,12 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         });
     }
 
-    private void scrollMessages(final boolean top) {
-        getSherlockActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (top) {
-                    listView.smoothScrollToPosition(0);
-                } else {
-                    listView.smoothScrollToPosition(listView.getCount() - 1);
-                }
-            }
-        });
+    public void scrollMessages(final boolean top) {
+        if (top) {
+            listView.smoothScrollToPosition(0);
+        } else {
+            listView.smoothScrollToPosition(listView.getCount() - 1);
+        }
     }
 
     @Override

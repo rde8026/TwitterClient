@@ -15,6 +15,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private static final String TAG = ViewPagerAdapter.class.getSimpleName();
     private final int PAGE_COUNT = 3;
+    private TweetsFragment tweetsFragment;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,7 +25,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                TweetsFragment tweetsFragment = new TweetsFragment();
+                //TweetsFragment tweetsFragment = new TweetsFragment();
+                if (tweetsFragment == null) {
+                    tweetsFragment = new TweetsFragment();
+                }
                 return tweetsFragment;
             case 1:
                 MentionsFragment mentionsFragment = new MentionsFragment();

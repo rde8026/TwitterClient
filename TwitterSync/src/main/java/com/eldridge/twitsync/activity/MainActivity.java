@@ -1,11 +1,11 @@
 package com.eldridge.twitsync.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -16,12 +16,15 @@ import com.eldridge.twitsync.adapter.ViewPagerAdapter;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
+import com.eldridge.twitsync.fragment.TweetsFragment;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.squareup.otto.Subscribe;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
 public class MainActivity extends SherlockFragmentActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private FragmentManager fragmentManager;
     private PreferenceController preferenceController;
@@ -58,7 +61,7 @@ public class MainActivity extends SherlockFragmentActivity {
         mViewPager.setOnPageChangeListener(viewPagerListener);
 
         fragmentManager = getSupportFragmentManager();
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
+        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
         mViewPager.setAdapter(viewPagerAdapter);
 
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
@@ -74,7 +77,16 @@ public class MainActivity extends SherlockFragmentActivity {
 
             @Override
             public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
+                Log.d(TAG, "*** TabReselected: " + tab.getPosition() + " ***");
+                if (tab.getPosition() == 0) {
+                    Log.d(TAG, "*** TimeLine Tab Reselected ***");
+                    try {
+                        TweetsFragment tweetsFragment = (TweetsFragment) viewPagerAdapter.getItem(tab.getPosition());
+                        tweetsFragment.scrollMessages(true);
+                    } catch (Exception e) {
+                        Log.e(TAG, "", e);
+                    }
+                }
             }
         };
 
