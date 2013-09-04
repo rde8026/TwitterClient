@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,7 +17,6 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import com.eldridge.twitsync.R;
 import com.eldridge.twitsync.activity.MainActivity;
 import com.eldridge.twitsync.adapter.EndlessTweetsAdapter;
@@ -27,7 +26,6 @@ import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.GcmController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.controller.TwitterApiController;
-import com.eldridge.twitsync.message.beans.AuthorizationCompleteMessage;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
 import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
@@ -52,7 +50,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     private TweetsAdapter adapter;
     private EndlessTweetsAdapter endlessTweetsAdapter;
 
-    @InjectView(R.id.tweetAction) Button tweetAction;
+    @InjectView(R.id.tweetAction) ImageButton tweetAction;
     @InjectView(R.id.tweetEdit) EditText tweetEdit;
 
     private PullToRefreshAttacher pullToRefreshAttacher;

@@ -50,12 +50,13 @@
                 android:layout_weight="4"
                 android:hint="@string/tweet_edit_text_hint"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/tweetAction"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                android:layout_weight=".5"
-                android:background="@android:drawable/ic_menu_send"/>
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_send_states"
+                android:background="@null"/>
 
         </LinearLayout>
 
