@@ -3,6 +3,7 @@ package com.eldridge.twitsync.controller;
 import android.content.Context;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.message.beans.ConversationMessage;
 import com.eldridge.twitsync.message.beans.DirectMessagesMessage;
@@ -16,6 +17,7 @@ import com.eldridge.twitsync.rest.endpoints.payload.StatusUpdatePayload;
 import com.eldridge.twitsync.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,9 +54,9 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 200;
+    private static final int COUNT = 20;
     private static final int HISTORY_COUNT = 50;
-    private static final int MAX_PAGE_NUMBER = 4;
+    private static final int MAX_PAGE_NUMBER = 3;
 
     private static final int THREAD_POOL_SIZE = 20;
     private ExecutorService executorService;
@@ -191,29 +193,39 @@ public class TwitterApiController {
                 int pageNumber = 1;
                 Paging paging = null;
                 try {
-                    paging = new Paging(pageNumber, COUNT, statusId);
+                    paging = new Paging(pageNumber, 5, statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
-                    if (tweets.isEmpty()) {
-                        keepFetching = false;
-                    }
-                    CacheController.getInstance(context).addToCache(tweets, true);
                     Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
+                    if (tweets.isEmpty()) {
+                        Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " returned no new tweets! ****");
+                        keepFetching = false;
+                    } else {
+                        Log.d(TAG, "**** Adding " + tweets.size() + " to cache [PageNumber: 1] ****");
+                        //CacheController.getInstance(context).addToCache(tweets, true);
+                    }
                     while (keepFetching) {
                         pageNumber++;
+                        paging = new Paging(pageNumber, 5, statusId);
                         Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
-                        paging = new Paging(pageNumber, COUNT, statusId);
                         ResponseList<Status> moreTweets = getPagedTweets(paging);
                         if (moreTweets.isEmpty()) {
                             keepFetching = false;
-                            Log.d(TAG, "*** [Refresh] No [MORE] tweets returned ***");
+                            Log.d(TAG, "*** [Refresh] PageNumber: " + pageNumber + " No [MORE] tweets returned ***");
+                        } else {
+                            Log.d(TAG, "**** Adding " + moreTweets.size() + " to base tweets list ****");
+                            //CacheController.getInstance(context).addToCache(moreTweets, true);
+                            for (Status s : moreTweets) {
+                                tweets.add(s);
+                            }
                         }
-                        tweets.addAll(moreTweets);
-                        CacheController.getInstance(context).addToCache(moreTweets, true);
                     }
+                    //Collections.reverse(tweets);
                     updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
                 } catch (TwitterException te) {
                     Log.e(TAG, "", te);
+                    Crashlytics.log("Exception refreshing timeLine");
+                    Crashlytics.logException(te);
                     BusController.getInstance().postMessage(new ErrorMessage(te.getMessage(), GET_USER_TIMELINE_ERROR_CODE));
                 }
             }
