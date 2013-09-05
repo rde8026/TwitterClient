@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.eldridge.twitsync.BuildConfig;
+import com.eldridge.twitsync.db.Tweet;
 import com.eldridge.twitsync.message.beans.ConversationMessage;
 import com.eldridge.twitsync.message.beans.DirectMessagesMessage;
 import com.eldridge.twitsync.message.beans.ErrorMessage;
@@ -192,6 +193,7 @@ public class TwitterApiController {
                 boolean keepFetching = true;
                 int pageNumber = 1;
                 Paging paging = null;
+                ArrayList<Tweet> items = new ArrayList<Tweet>();
                 try {
                     paging = new Paging(pageNumber, 5, statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
@@ -201,7 +203,9 @@ public class TwitterApiController {
                         keepFetching = false;
                     } else {
                         Log.d(TAG, "**** Adding " + tweets.size() + " to cache [PageNumber: 1] ****");
-                        //CacheController.getInstance(context).addToCache(tweets, true);
+                        for (Status s : tweets) {
+                            items.add(CacheController.getInstance(context).createTweetObject(s));
+                        }
                     }
                     while (keepFetching) {
                         pageNumber++;
@@ -213,13 +217,14 @@ public class TwitterApiController {
                             Log.d(TAG, "*** [Refresh] PageNumber: " + pageNumber + " No [MORE] tweets returned ***");
                         } else {
                             Log.d(TAG, "**** Adding " + moreTweets.size() + " to base tweets list ****");
-                            //CacheController.getInstance(context).addToCache(moreTweets, true);
                             for (Status s : moreTweets) {
+                                items.add(CacheController.getInstance(context).createTweetObject(s));
                                 tweets.add(s);
                             }
                         }
                     }
-                    //Collections.reverse(tweets);
+                    Collections.reverse(tweets);
+                    CacheController.getInstance(context).addToCache(items, true);
                     updateServerWithLatestMessage(tweets);
                     BusController.getInstance().postMessage(new TimelineUpdateMessage(tweets, true, true));
                 } catch (TwitterException te) {
@@ -232,7 +237,12 @@ public class TwitterApiController {
         });
     }
 
-    //This is NOT THREADED so it must be called from a background thread.
+    /**
+     * NOTE: This is not threaded so it should only be called from a background thread.
+     * @param statusId
+     * @return ResponseList<Status> tweets
+     * @throws TwitterException
+     */
     public ResponseList<Status> syncGetUserTimeLineHistory(final Long statusId) throws TwitterException {
         Paging paging = new Paging();
         paging.setMaxId(statusId);

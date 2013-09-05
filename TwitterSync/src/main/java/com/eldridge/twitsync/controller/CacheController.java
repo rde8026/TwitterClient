@@ -2,10 +2,12 @@ package com.eldridge.twitsync.controller;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.crashlytics.android.Crashlytics;
 import com.eldridge.twitsync.BuildConfig;
 import com.eldridge.twitsync.db.Tweet;
 
@@ -76,7 +78,27 @@ public class CacheController {
         }
     }
 
-    private Tweet createTweetObject(Status s) {
+    public synchronized void addToCache(final ArrayList<Tweet> items, boolean front) {
+        try {
+            long startTime = System.currentTimeMillis();
+            if (front) {
+                Collections.reverse(items);
+            }
+            for (Tweet t : items) {
+                addTweetToMemoryCache(t, front);
+            }
+            if (BuildConfig.DEBUG) {
+                long delta = System.currentTimeMillis() - startTime;
+                Log.d(TAG, "** Added " + items.size() + " to Cache **");
+                Log.d(TAG, "** Insert into memory cache took " + delta + "(ms) **");
+            }
+        } catch (IOException ioe) {
+            Crashlytics.logException(ioe);
+            Log.e(TAG, "", ioe);
+        }
+    }
+
+    public Tweet createTweetObject(Status s) {
         Tweet tweet = new Tweet();
         tweet.tweetId = s.getId();
         tweet.timestamp = s.getCreatedAt().getTime();
