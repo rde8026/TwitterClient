@@ -362,6 +362,19 @@ public class TwitterApiController {
         });
     }
 
+    public void reTweetMessage(final long statusId) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    twitter.retweetStatus(statusId);
+                } catch (TwitterException te) {
+                    Log.e(TAG, "", te);
+                }
+            }
+        });
+    }
+
     private ResponseList<Status> getPagedTweets(Paging paging) throws TwitterException {
         return  (paging != null) ? twitter.getHomeTimeline(paging) : twitter.getHomeTimeline();
     }
