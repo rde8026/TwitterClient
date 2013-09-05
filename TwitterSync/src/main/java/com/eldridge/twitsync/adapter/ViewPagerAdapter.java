@@ -16,6 +16,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = ViewPagerAdapter.class.getSimpleName();
     private final int PAGE_COUNT = 3;
     private TweetsFragment tweetsFragment;
+    private MentionsFragment mentionsFragment;
+    private DirectMessageFragment directMessageFragment;
 
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -31,10 +33,14 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 }
                 return tweetsFragment;
             case 1:
-                MentionsFragment mentionsFragment = new MentionsFragment();
+                if (mentionsFragment == null) {
+                    mentionsFragment = new MentionsFragment();
+                }
                 return mentionsFragment;
             case 2:
-                DirectMessageFragment directMessageFragment = new DirectMessageFragment();
+                if (directMessageFragment == null) {
+                    directMessageFragment = new DirectMessageFragment();
+                }
                 return directMessageFragment;
         }
         return null;
