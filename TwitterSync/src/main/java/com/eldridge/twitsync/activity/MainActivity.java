@@ -18,6 +18,7 @@ import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.fragment.TweetsFragment;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
+import com.eldridge.twitsync.service.TwitterStreamingService;
 import com.squareup.otto.Subscribe;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
@@ -115,6 +116,7 @@ public class MainActivity extends SherlockFragmentActivity {
     protected void onResume() {
         super.onResume();
         BusController.getInstance().register(this);
+        startStreamingService();
     }
 
     @Override
@@ -135,6 +137,11 @@ public class MainActivity extends SherlockFragmentActivity {
                 startActivity(detailIntent);
             }
         });
+    }
+
+    private void startStreamingService() {
+        Intent twitterStreamService = new Intent(this, TwitterStreamingService.class);
+        startService(twitterStreamService);
     }
 
 }
