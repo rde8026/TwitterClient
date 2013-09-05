@@ -55,7 +55,8 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 100;
+    private static final int REFRESH_COUNT = 200;
+    private static final int INITIAL_COUNT = 100;
     private static final int HISTORY_COUNT = 50;
     private static final int MAX_PAGE_NUMBER = 3;
 
@@ -149,7 +150,7 @@ public class TwitterApiController {
                 int pageNumber = 1;
                 Paging paging = null;
                 try {
-                    paging = new Paging(pageNumber, COUNT);
+                    paging = new Paging(pageNumber, INITIAL_COUNT);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     if (tweets.isEmpty()) {
                         keepFetching = false;
@@ -161,7 +162,7 @@ public class TwitterApiController {
                         if (pageNumber < MAX_PAGE_NUMBER ) {
                             pageNumber++;
                             Log.d(TAG, "**** Fetching PageNumber: " + pageNumber + " ****");
-                            paging = new Paging(pageNumber, COUNT);
+                            paging = new Paging(pageNumber, INITIAL_COUNT);
                             //Have to do this hack to update the in mem cache in real time because of limitation of Twitter4J not
                             //being able to get access to the raw json after things are added to the original tweets list
                             ResponseList<Status> moreTweets = getPagedTweets(paging);
@@ -195,7 +196,7 @@ public class TwitterApiController {
                 Paging paging = null;
                 ArrayList<Tweet> items = new ArrayList<Tweet>();
                 try {
-                    paging = new Paging(pageNumber, COUNT, statusId);
+                    paging = new Paging(pageNumber, REFRESH_COUNT, statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
                     if (tweets.isEmpty()) {
@@ -209,7 +210,7 @@ public class TwitterApiController {
                     }
                     while (keepFetching) {
                         pageNumber++;
-                        paging = new Paging(pageNumber, COUNT, statusId);
+                        paging = new Paging(pageNumber, REFRESH_COUNT, statusId);
                         Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
                         ResponseList<Status> moreTweets = getPagedTweets(paging);
                         if (moreTweets.isEmpty()) {
@@ -267,7 +268,7 @@ public class TwitterApiController {
             if (hasCache) {
                 sinceId = cachedTweets.get(0).getId();
             }
-            paging = new Paging(pageNumber, COUNT, sinceId, messageId);
+            paging = new Paging(pageNumber, REFRESH_COUNT, sinceId, messageId);
             ResponseList<Status> tweets = getPagedTweets(paging);
             if (tweets.isEmpty()) {
                 keepFetching = false;
@@ -281,7 +282,7 @@ public class TwitterApiController {
             while (keepFetching) {
                 pageNumber++;
                 Log.d(TAG, "**** Sync tweets from Server - PageNumber: " + pageNumber + " *****");
-                paging = new Paging(pageNumber, COUNT, sinceId, messageId);
+                paging = new Paging(pageNumber, REFRESH_COUNT, sinceId, messageId);
                 ResponseList<Status> moreTweets = getPagedTweets(paging);
                 if (moreTweets.isEmpty()) {
                     keepFetching = false;
