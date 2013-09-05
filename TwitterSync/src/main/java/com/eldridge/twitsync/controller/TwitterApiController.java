@@ -55,7 +55,7 @@ public class TwitterApiController {
     public static final int GET_USER_INFO_ERROR_CODE = 2000;
     public static final int GET_USER_TIMELINE_ERROR_CODE = 2001;
 
-    private static final int COUNT = 20;
+    private static final int COUNT = 100;
     private static final int HISTORY_COUNT = 50;
     private static final int MAX_PAGE_NUMBER = 3;
 
@@ -195,7 +195,7 @@ public class TwitterApiController {
                 Paging paging = null;
                 ArrayList<Tweet> items = new ArrayList<Tweet>();
                 try {
-                    paging = new Paging(pageNumber, 5, statusId);
+                    paging = new Paging(pageNumber, COUNT, statusId);
                     ResponseList<Status> tweets = getPagedTweets(paging);
                     Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
                     if (tweets.isEmpty()) {
@@ -209,7 +209,7 @@ public class TwitterApiController {
                     }
                     while (keepFetching) {
                         pageNumber++;
-                        paging = new Paging(pageNumber, 5, statusId);
+                        paging = new Paging(pageNumber, COUNT, statusId);
                         Log.d(TAG, "**** [Refresh] Fetching PageNumber: " + pageNumber + " ****");
                         ResponseList<Status> moreTweets = getPagedTweets(paging);
                         if (moreTweets.isEmpty()) {
