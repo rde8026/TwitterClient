@@ -156,7 +156,10 @@ public class TwitterStreamingService extends Service {
         public void onStatus(Status status) {
             Log.e(TAG, "**** onStatus was called by " + TAG + " ****");
             Tweet tweet = CacheController.getInstance(_context).createTweetObject(status);
-            Log.d(TAG, "**** Tweet Text is: " + status.getText() + " *****");
+            CacheController.getInstance(_context).addToCache(tweet, true);
+            Log.d(TAG, "**** Cached new Tweet with ID: " + status.getId() + " ****");
+            //TODO: Update Server with latest message cached
+            //TODO: Notify UI that new messages are available
         }
 
         @Override
@@ -182,42 +185,6 @@ public class TwitterStreamingService extends Service {
         @Override
         public void onException(Exception e) {
             Log.e(TAG, "Exception in UserStreamListener");
-            Log.e(TAG, "", e);
-            Crashlytics.logException(e);
-        }
-    };
-
-    private StatusListener statusListener = new StatusListener() {
-        @Override
-        public void onStatus(Status status) {
-            Log.e(TAG, "**** onStatus was called by " + TAG + " ****");
-            Tweet tweet = CacheController.getInstance(_context).createTweetObject(status);
-            Log.d(TAG, "**** Tweet Text is: " + status.getText() + " *****");
-        }
-
-        @Override
-        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-
-        }
-
-        @Override
-        public void onTrackLimitationNotice(int i) {
-
-        }
-
-        @Override
-        public void onScrubGeo(long l, long l2) {
-
-        }
-
-        @Override
-        public void onStallWarning(StallWarning stallWarning) {
-
-        }
-
-        @Override
-        public void onException(Exception e) {
-            Log.e(TAG, "**** Exception in Twitter4J statusListener ****");
             Log.e(TAG, "", e);
             Crashlytics.logException(e);
         }
