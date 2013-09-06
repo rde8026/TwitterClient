@@ -15,6 +15,7 @@ public class TimelineUpdateMessage implements Serializable {
     private List<Status> tweets;
     private boolean refresh;
     private boolean prepend;
+    private boolean background;
 
 
     public TimelineUpdateMessage() {
@@ -24,18 +25,28 @@ public class TimelineUpdateMessage implements Serializable {
         this.tweets = tweets;
         this.refresh = false;
         this.prepend = false;
+        this.background = false;
     }
 
     public TimelineUpdateMessage(List<Status> tweets, boolean refresh) {
         this.tweets = tweets;
         this.refresh = refresh;
-        prepend = false;
+        this.prepend = false;
+        this.background = false;
     }
 
     public TimelineUpdateMessage(List<Status> tweets, boolean refresh, boolean prepend) {
         this.tweets = tweets;
         this.refresh = refresh;
         this.prepend = prepend;
+        this.background = false;
+    }
+
+    public TimelineUpdateMessage(List<Status> tweets, boolean refresh, boolean prepend, boolean background) {
+        this.tweets = tweets;
+        this.refresh = refresh;
+        this.prepend = prepend;
+        this.background = background;
     }
 
     public List<Status> getTweets() {
@@ -62,4 +73,11 @@ public class TimelineUpdateMessage implements Serializable {
         this.prepend = prepend;
     }
 
+    public boolean isBackground() {
+        return background;
+    }
+
+    public void setBackground(boolean background) {
+        this.background = background;
+    }
 }

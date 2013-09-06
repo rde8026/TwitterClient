@@ -8,6 +8,14 @@
           android:showAsAction="always"
           android:visible="false"/>
 
+    <item android:id="@+id/menuNewItems"
+          android:title="@string/menu_refresh_title"
+          android:icon="@drawable/ic_action_refresh_active"
+          android:alphabeticShortcut="r"
+          android:orderInCategory="100"
+          android:showAsAction="always"
+          android:visible="false"/>
+
     <item android:id="@+id/moveToTop"
           android:title="@string/menu_move_to_top"
           android:orderInCategory="100"

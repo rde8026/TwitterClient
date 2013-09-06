@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -58,16 +59,12 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
     private InputMethodManager imm;
     private Menu menu;
 
+    private static int refreshCount = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        /*if (PreferenceController.getInstance(getSherlockActivity().getApplicationContext()).checkForExistingCredentials()) {
-            TwitterApiController.getInstance(getSherlockActivity().getApplicationContext()).getUserTimeLine();
-        }
-
-        imm = (InputMethodManager)getSherlockActivity().getSystemService(Context.INPUT_METHOD_SERVICE);*/
     }
 
     @Override
@@ -123,6 +120,22 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         BusController.getInstance().postMessage(new TweetDetailMessage(s));
     }
 
+    private AbsListView.OnScrollListener scrollListener = new AbsListView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+        }
+
+        @Override
+        public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            if ( isNewItemsShowing() && (firstVisibleItem == 0) ) {
+                toggleNewItemsMenuItem();
+                refreshCount = 0;
+            }
+            int currentCount = totalItemCount - firstVisibleItem;
+        }
+
+    };
+
     @Subscribe
     public void userMessage(TwitterUserMessage twitterUserMessage) {
         Log.d(TAG, "*** Requesting Users TimeLine ***");
@@ -148,12 +161,18 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
 
                 if (timelineUpdateMessage.isRefresh()) {
                     if (timelineUpdateMessage.getTweets() != null && timelineUpdateMessage.getTweets().size() > 0 && timelineUpdateMessage.isPrepend()) {
+                        int currentIndex = listView.getFirstVisiblePosition();
                         for (Status s : timelineUpdateMessage.getTweets()) {
                             adapter.insert(s, 0);
                         }
 
                         endlessTweetsAdapter.notifyDataSetChanged();
-                        listView.smoothScrollToPosition(0);
+                        refreshCount += timelineUpdateMessage.getTweets().size();
+                        listView.setSelection(currentIndex + refreshCount);
+
+                        if ( timelineUpdateMessage.isBackground() && !isNewItemsShowing() ) {
+                            toggleNewItemsMenuItem();
+                        }
                     }
                 }
                 pullToRefreshAttacher.setRefreshComplete();
@@ -215,6 +234,7 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main, menu);
         this.menu = menu;
+        listView.setOnScrollListener(scrollListener);
     }
 
     @Override
@@ -269,6 +289,20 @@ public class TweetsFragment extends SherlockListFragment implements PullToRefres
         } else {
             progressItem.setVisible(true);
         }
+    }
+
+    private void toggleNewItemsMenuItem() {
+        MenuItem newItems = this.menu.findItem(R.id.menuNewItems);
+        if (newItems.isVisible()) {
+            newItems.setVisible(false);
+        } else {
+            newItems.setVisible(true);
+        }
+    }
+
+    private boolean isNewItemsShowing() {
+        MenuItem newItems = this.menu.findItem(R.id.menuNewItems);
+        return newItems.isVisible();
     }
 
 }

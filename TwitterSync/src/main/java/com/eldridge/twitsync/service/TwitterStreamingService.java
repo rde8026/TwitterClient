@@ -8,11 +8,15 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
 import com.eldridge.twitsync.controller.TwitterRegisterController;
 import com.eldridge.twitsync.db.Tweet;
+import com.eldridge.twitsync.message.beans.TimelineUpdateMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,6 +46,9 @@ public class TwitterStreamingService extends Service {
 
     private TwitterStream twitterStream;
     private Context _context;
+    private List<Status> tweets;
+
+    private static final int TWEET_STAGE_COUNT = 5;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -64,6 +71,8 @@ public class TwitterStreamingService extends Service {
             twitterStream.setOAuthAccessToken(at);
             twitterStream.addListener(userStreamListener);
             twitterStream.user();
+
+            tweets = new ArrayList<Status>();
 
             Log.d(TAG, "**** TwitterStream was created and should be running ***");
         }
@@ -155,11 +164,12 @@ public class TwitterStreamingService extends Service {
         @Override
         public void onStatus(Status status) {
             Log.e(TAG, "**** onStatus was called by " + TAG + " ****");
-            Tweet tweet = CacheController.getInstance(_context).createTweetObject(status);
-            CacheController.getInstance(_context).addToCache(tweet, true);
+            CacheController.getInstance(_context).addToCache(CacheController.getInstance(_context).createTweetObject(status), true);
             Log.d(TAG, "**** Cached new Tweet with ID: " + status.getId() + " ****");
+            List<Status> tweet = new ArrayList<Status>();
+            tweet.add(status);
+            BusController.getInstance().postMessage(new TimelineUpdateMessage(tweet, true, true, true));
             //TODO: Update Server with latest message cached
-            //TODO: Notify UI that new messages are available
         }
 
         @Override
