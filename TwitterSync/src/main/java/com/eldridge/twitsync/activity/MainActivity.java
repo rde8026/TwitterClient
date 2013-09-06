@@ -116,7 +116,9 @@ public class MainActivity extends SherlockFragmentActivity {
     protected void onResume() {
         super.onResume();
         BusController.getInstance().register(this);
-        startStreamingService();
+        if (PreferenceController.getInstance(getApplicationContext()).checkForExistingCredentials()) {
+            startStreamingService();
+        }
     }
 
     @Override
