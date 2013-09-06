@@ -65,11 +65,6 @@ public class CacheController {
     public synchronized void addToCache(final ResponseList<Status> items, boolean front) {
         try {
             long startTime = System.currentTimeMillis();
-            //If we are adding Tweets to the front of the cache they need to be in the
-            //reverse order of how they will be presented in the list so our cache is properly ordered
-            /*if (front) {
-                Collections.reverse(items);
-            }*/
             for (Status s : items) {
                 addTweetToMemoryCache(createTweetObject(s), front);
             }
@@ -86,9 +81,6 @@ public class CacheController {
     public synchronized void addToCache(final ArrayList<Tweet> items, boolean front) {
         try {
             long startTime = System.currentTimeMillis();
-            /*if (front) {
-                Collections.reverse(items);
-            }*/
             for (Tweet t : items) {
                 addTweetToMemoryCache(t, front);
             }
@@ -126,14 +118,6 @@ public class CacheController {
     }
 
     private synchronized void addTweetToMemoryCache(Tweet t, boolean front) throws IOException {
-        /*if (!deque.contains(t)) {
-            if (front) {
-                deque.addFirst(t);
-            } else {
-                deque.addLast(t);
-
-            }
-        }*/
         t.save();
     }
 
@@ -141,7 +125,6 @@ public class CacheController {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                //deleteDbRecords();
                 try {
                     ActiveAndroid.beginTransaction();
                     List<Tweet> tweets = new Select().all().from(Tweet.class).execute();
@@ -151,31 +134,6 @@ public class CacheController {
                         Tweet t = tweets.get(CACHE_SIZE);
                         new Delete().from(Tweet.class).where("timestamp <= " + t.timestamp).execute();
                     }
-                    /*if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "** Persistent Cache cleared **");
-                        Log.d(TAG, "** Loading " + deque.size() + " to cache **");
-                    }
-                    Iterator<Tweet> iterator = deque.iterator();
-                    int count = 0;
-                    while (iterator.hasNext()) {
-                        if (count >= CACHE_SIZE) {
-                            Log.d(TAG, "**** CACHE SIZE: " + CACHE_SIZE + " ****");
-                            Log.d(TAG, "****** Cache Size has been reached ******");
-                            break;
-                        }
-
-                        Tweet t = iterator.next();
-                        if (t.getId() != null) {
-                            Tweet hackForUpdate = new Tweet();
-                            hackForUpdate.timestamp = t.timestamp;
-                            hackForUpdate.tweetId = t.tweetId;
-                            hackForUpdate.json = t.json;
-                            hackForUpdate.save();
-                        } else {
-                            t.save();
-                        }
-                        count++;
-                    }*/
                     ActiveAndroid.setTransactionSuccessful();
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
@@ -199,7 +157,6 @@ public class CacheController {
         for (Tweet t : cachedTweets) {
             Status s = DataObjectFactory.createStatus(t.json);
             tweets.add(s);
-            //deque.addLast(t);
         }
 
         long delta = System.currentTimeMillis() - startTime;
