@@ -384,13 +384,24 @@ public class TwitterApiController {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                if (tweets != null && !tweets.isEmpty()) {
+                    updateServerWithLatestMessage(tweets.get(0));
+                }
+            }
+        });
+    }
+    //TODO: Consolidate these two methods and don't take a param but rather get the last tweet from the cache
+    public void updateServerWithLatestMessage(final Status status) {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
                 try {
                     //TODO: Fix race condition where user/device registration is not complete but we attempt to store the last message
                     //We should queue the request and replay it a configurable amount of times.
-                    if (tweets != null && !tweets.isEmpty() && PreferenceController.getInstance(context).getRegistrationId().length() > 0) {
+                    if (status != null && PreferenceController.getInstance(context).getRegistrationId().length() > 0) {
                         String deviceId = Utils.getUniqueDeviceId(context);
                         Long twitterId = PreferenceController.getInstance(context).getUserId();
-                        Long messageId = tweets.get(0).getId();
+                        Long messageId = status.getId();
 
                         RestAdapter restAdapter = RestController.getInstance(context).getRestAdapter();
                         StatusEndpoint statusEndpoint = restAdapter.create(StatusEndpoint.class);

@@ -16,6 +16,7 @@ import com.eldridge.twitsync.adapter.ViewPagerAdapter;
 import com.eldridge.twitsync.controller.BusController;
 import com.eldridge.twitsync.controller.CacheController;
 import com.eldridge.twitsync.controller.PreferenceController;
+import com.eldridge.twitsync.controller.TwitterApiController;
 import com.eldridge.twitsync.fragment.TweetsFragment;
 import com.eldridge.twitsync.message.beans.TweetDetailMessage;
 import com.eldridge.twitsync.service.TwitterStreamingService;
@@ -126,6 +127,12 @@ public class MainActivity extends SherlockFragmentActivity {
         super.onDestroy();
         CacheController.getInstance(this).trimCache();
         BusController.getInstance().unRegister(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //TODO: Update Server with last read tweet!
     }
 
     @SuppressWarnings("unused")
